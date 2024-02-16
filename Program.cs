@@ -12,8 +12,30 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddRazorPages();
+
+builder.Services.Configure<IdentityOptions>(options =>
+{
+    // Password settings.
+    options.Password.RequireDigit = false;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequiredLength = 6;
+    options.Password.RequiredUniqueChars = 1;
+
+    // Lockout settings.
+    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+    options.Lockout.MaxFailedAccessAttempts = 5;
+    options.Lockout.AllowedForNewUsers = true;
+
+    // User settings.
+    options.User.AllowedUserNameCharacters =
+        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+    options.User.RequireUniqueEmail = true;
+});
 
 var app = builder.Build();
 
@@ -37,5 +59,34 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapRazorPages();
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var context = services.GetRequiredService<ApplicationDbContext>();
+    var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
+    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+    await context.Database.MigrateAsync();
+
+    if (!context.Roles.Any())
+    {
+        await roleManager.CreateAsync(new IdentityRole("SuperAdmin"));
+        await roleManager.CreateAsync(new IdentityRole("Staff"));
+        await roleManager.CreateAsync(new IdentityRole("Owner"));
+        await roleManager.CreateAsync(new IdentityRole("SubOwner"));
+    }
+
+    if (!context.Users.Any())
+    {
+        var user = new IdentityUser
+        {
+            UserName = "superadmin@localhost",
+            Email = "superadmin@localhost",
+            EmailConfirmed = true
+        };
+        await userManager.CreateAsync(user, "181020");
+        await userManager.AddToRoleAsync(user, "SuperAdmin");
+    }
+}
 
 app.Run();
