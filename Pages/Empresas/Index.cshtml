@@ -12,36 +12,37 @@
 </p>
 <table class="table">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Empresa[0].CUIT)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Empresa[0].Nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Empresa[0].Categoria)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Empresa[0].Direccion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Empresa[0].Telefono)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Empresa[0].Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Empresa[0].Web)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Empresa[0].Logo)
-            </th>
-            <th></th>
-        </tr>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Empresa[0].CUIT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Empresa[0].Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Empresa[0].Categoria)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Empresa[0].Direccion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Empresa[0].Telefono)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Empresa[0].Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Empresa[0].Web)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Empresa[0].Logo)
+        </th>
+        <th></th>
+    </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Empresa) {
+    @foreach (var item in Model.Empresa)
+    {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.CUIT)
@@ -73,6 +74,6 @@
                 <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
-}
+    }
     </tbody>
 </table>
