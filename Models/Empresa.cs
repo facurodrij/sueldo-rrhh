@@ -25,10 +25,17 @@ public class Empresa
     [StringLength(100, MinimumLength = 3)]
     public string Direccion { get; set; }
 
-    [Display(Name = "Teléfono")] [Phone] public string Telefono { get; set; }
-    [EmailAddress] public string Email { get; set; }
+    [Display(Name = "Teléfono")]
+    [Required]
+    [Phone]
+    public string Telefono { get; set; }
 
-    [Url] public string Web { get; set; }
+    [Required] [EmailAddress] public string Email { get; set; }
 
-    [Url] public string Logo { get; set; }
+    [Display(Name = "Fecha de Registro")]
+    [DataType(DataType.Date)]
+    public DateTime FechaRegistro { get; set; }
+
+    // Relación Uno a Muchos con Area: Una Empresa tiene muchas Areas
+    public ICollection<Area> Areas { get; }
 }

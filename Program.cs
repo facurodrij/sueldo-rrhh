@@ -72,6 +72,7 @@ using (var scope = app.Services.CreateScope())
     var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
     await context.Database.MigrateAsync();
 
+    // Seed database with initial roles
     if (!context.Roles.Any())
     {
         await roleManager.CreateAsync(new IdentityRole("SuperAdmin"));
@@ -80,6 +81,7 @@ using (var scope = app.Services.CreateScope())
         await roleManager.CreateAsync(new IdentityRole("SubOwner"));
     }
 
+    // Seed database with an initial user
     if (!context.Users.Any())
     {
         var user = new ApplicationUser
@@ -90,6 +92,23 @@ using (var scope = app.Services.CreateScope())
         };
         await userManager.CreateAsync(user, "181020");
         await userManager.AddToRoleAsync(user, "SuperAdmin");
+    }
+
+    // Seed database with an initial empresa
+    if (!context.Empresas.Any())
+    {
+        var empresa = new Empresa
+        {
+            CUIT = "12345678901",
+            Nombre = "StockCar",
+            Categoria = "Comercio",
+            Direccion = "Direccion 1",
+            Telefono = "123456789",
+            Email = "stockcar@localhost",
+            FechaRegistro = DateTime.Now
+        };
+        context.Empresas.Add(empresa);
+        await context.SaveChangesAsync();
     }
 }
 

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using sueldo_rrhh.Data;
 
@@ -10,9 +11,11 @@ using sueldo_rrhh.Data;
 namespace sueldo_rrhh.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240219184615_Area-Departamento-Puesto")]
+    partial class AreaDepartamentoPuesto
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.2");
@@ -292,7 +295,7 @@ namespace sueldo_rrhh.Data.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("PuestoId")
+                    b.Property<int?>("PuestoId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
@@ -330,9 +333,6 @@ namespace sueldo_rrhh.Data.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("FechaRegistro")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -343,9 +343,6 @@ namespace sueldo_rrhh.Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CUIT")
-                        .IsUnique();
 
                     b.ToTable("Empresas");
                 });
@@ -457,15 +454,11 @@ namespace sueldo_rrhh.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("sueldo_rrhh.Models.Puesto", "Puesto")
+                    b.HasOne("sueldo_rrhh.Models.Puesto", null)
                         .WithMany("Empleados")
-                        .HasForeignKey("PuestoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PuestoId");
 
                     b.Navigation("ApplicationUser");
-
-                    b.Navigation("Puesto");
                 });
 
             modelBuilder.Entity("sueldo_rrhh.Models.Puesto", b =>

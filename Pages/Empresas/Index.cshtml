@@ -31,12 +31,6 @@
         <th>
             @Html.DisplayNameFor(model => model.Empresa[0].Email)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Empresa[0].Web)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Empresa[0].Logo)
-        </th>
         <th></th>
     </tr>
     </thead>
@@ -61,12 +55,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Web)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Logo)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
