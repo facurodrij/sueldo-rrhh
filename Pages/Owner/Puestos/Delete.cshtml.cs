@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using sueldo_rrhh.Data;
 using sueldo_rrhh.Models;
 
-namespace sueldo_rrhh.Pages.Areas
+namespace sueldo_rrhh.Pages.Owner.Puestos
 {
     public class DeleteModel : PageModel
     {
@@ -19,8 +19,7 @@ namespace sueldo_rrhh.Pages.Areas
             _context = context;
         }
 
-        [BindProperty]
-        public Area Area { get; set; } = default!;
+        [BindProperty] public Puesto Puesto { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -29,16 +28,17 @@ namespace sueldo_rrhh.Pages.Areas
                 return NotFound();
             }
 
-            var area = await _context.Areas.FirstOrDefaultAsync(m => m.Id == id);
+            var puesto = await _context.Puestos.Include(p => p.Departamento).FirstOrDefaultAsync(m => m.Id == id);
 
-            if (area == null)
+            if (puesto == null)
             {
                 return NotFound();
             }
             else
             {
-                Area = area;
+                Puesto = puesto;
             }
+
             return Page();
         }
 
@@ -49,11 +49,11 @@ namespace sueldo_rrhh.Pages.Areas
                 return NotFound();
             }
 
-            var area = await _context.Areas.FindAsync(id);
-            if (area != null)
+            var puesto = await _context.Puestos.FindAsync(id);
+            if (puesto != null)
             {
-                Area = area;
-                _context.Areas.Remove(Area);
+                Puesto = puesto;
+                _context.Puestos.Remove(Puesto);
                 await _context.SaveChangesAsync();
             }
 

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using sueldo_rrhh.Data;
 using sueldo_rrhh.Models;
 
-namespace sueldo_rrhh.Pages.Areas
+namespace sueldo_rrhh.Pages.Owner.Puestos
 {
     public class DetailsModel : PageModel
     {
@@ -19,7 +19,7 @@ namespace sueldo_rrhh.Pages.Areas
             _context = context;
         }
 
-        public Area Area { get; set; } = default!;
+        public Puesto Puesto { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -28,14 +28,14 @@ namespace sueldo_rrhh.Pages.Areas
                 return NotFound();
             }
 
-            var area = await _context.Areas.FirstOrDefaultAsync(m => m.Id == id);
-            if (area == null)
+            var puesto = await _context.Puestos.Include(p => p.Departamento).FirstOrDefaultAsync(m => m.Id == id);
+            if (puesto == null)
             {
                 return NotFound();
             }
             else
             {
-                Area = area;
+                Puesto = puesto;
             }
             return Page();
         }
