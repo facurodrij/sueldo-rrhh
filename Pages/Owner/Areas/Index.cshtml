@@ -1,5 +1,5 @@
 @page
-@model sueldo_rrhh.Pages.Areas.IndexModel
+@model sueldo_rrhh.Pages.Owner.Areas.IndexModel
 
 @{
     ViewData["Title"] = "Index";
@@ -12,24 +12,25 @@
 </p>
 <table class="table">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Area[0].Nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Area[0].Empresa)
-            </th>
-            <th></th>
-        </tr>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Area[0].Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Area[0].Empresa)
+        </th>
+        <th></th>
+    </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Area) {
+    @foreach (var item in Model.Area)
+    {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Nombre)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Empresa.Nombre)
+                @Html.DisplayFor(modelItem => item.Empresa.CUIT)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
@@ -37,6 +38,6 @@
                 <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
-}
+    }
     </tbody>
 </table>
