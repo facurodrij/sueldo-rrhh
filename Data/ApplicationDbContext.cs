@@ -21,33 +21,10 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         base.OnModelCreating(modelBuilder);
 
-        modelBuilder.Entity<Empresa>()
-            .HasIndex(e => e.CUIT)
-            .IsUnique();
-
-        // Relación Muchos a Uno con Area: Muchas Areas pertenecen a una Empresa
-        modelBuilder.Entity<Area>()
-            .HasOne(a => a.Empresa)
-            .WithMany(e => e.Areas)
-            .HasForeignKey(a => a.EmpresaId);
-
-        // Relación Muchos a Uno con Departamento: Muchos Departamentos pertenecen a un Area
-        modelBuilder.Entity<Departamento>()
-            .HasOne(d => d.Area)
-            .WithMany(a => a.Departamentos)
-            .HasForeignKey(d => d.AreaId);
-
-        // Relación Muchos a Uno con Puesto: Muchos Puestos pertenecen a un Departamento
-        modelBuilder.Entity<Puesto>()
-            .HasOne(p => p.Departamento)
-            .WithMany(d => d.Puestos)
-            .HasForeignKey(p => p.DepartamentoId);
-
-        // Relación Uno a Uno Empleado - ApplicationUser
-        modelBuilder.Entity<Empleado>()
-            .HasOne(e => e.ApplicationUser)
-            .WithOne(u => u.Empleado)
-            .HasForeignKey<Empleado>(e => e.ApplicationUserId)
-            .IsRequired();
+        modelBuilder.Entity<Empresa>().ToTable("Empresa");
+        modelBuilder.Entity<Area>().ToTable("Area");
+        modelBuilder.Entity<Departamento>().ToTable("Departamento");
+        modelBuilder.Entity<Puesto>().ToTable("Puesto");
+        modelBuilder.Entity<Empleado>().ToTable("Empleado");
     }
 }

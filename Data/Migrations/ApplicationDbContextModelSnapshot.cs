@@ -231,7 +231,7 @@ namespace sueldo_rrhh.Data.Migrations
 
                     b.HasIndex("EmpresaId");
 
-                    b.ToTable("Areas");
+                    b.ToTable("Area", (string)null);
                 });
 
             modelBuilder.Entity("sueldo_rrhh.Models.Departamento", b =>
@@ -252,7 +252,7 @@ namespace sueldo_rrhh.Data.Migrations
 
                     b.HasIndex("AreaId");
 
-                    b.ToTable("Departamentos");
+                    b.ToTable("Departamento", (string)null);
                 });
 
             modelBuilder.Entity("sueldo_rrhh.Models.Empleado", b =>
@@ -302,7 +302,7 @@ namespace sueldo_rrhh.Data.Migrations
 
                     b.HasIndex("PuestoId");
 
-                    b.ToTable("Empleados");
+                    b.ToTable("Empleado", (string)null);
                 });
 
             modelBuilder.Entity("sueldo_rrhh.Models.Empresa", b =>
@@ -344,10 +344,7 @@ namespace sueldo_rrhh.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CUIT")
-                        .IsUnique();
-
-                    b.ToTable("Empresas");
+                    b.ToTable("Empresa", (string)null);
                 });
 
             modelBuilder.Entity("sueldo_rrhh.Models.Puesto", b =>
@@ -373,7 +370,7 @@ namespace sueldo_rrhh.Data.Migrations
 
                     b.HasIndex("DepartamentoId");
 
-                    b.ToTable("Puestos");
+                    b.ToTable("Puesto", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
