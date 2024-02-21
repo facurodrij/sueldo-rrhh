@@ -37,9 +37,9 @@ public class Empleado
 
     // Relación Muchos a Uno con Puesto: Muchos Empleados pertenecen a un Puesto
     public int PuestoId { get; set; }
-    public Puesto Puesto { get; set; }
+    public Puesto? Puesto { get; set; }
 
-    // Relación Uno a Uno con ApplicationUser (Required)
+    // Relación Uno a Uno con ApplicationUser
     public string ApplicationUserId { get; set; }
-    public ApplicationUser ApplicationUser { get; set; }
+    public ApplicationUser? ApplicationUser { get; set; }
 }

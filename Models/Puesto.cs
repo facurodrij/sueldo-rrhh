@@ -16,11 +16,10 @@ public class Puesto
     [StringLength(100, MinimumLength = 3)]
     public string Descripcion { get; set; }
 
-
     // Relación Muchos a Uno con Departamento: Muchos Puestos pertenecen a un Departamento
     public int DepartamentoId { get; set; }
-    public Departamento Departamento { get; set; }
+    public Departamento? Departamento { get; set; }
 
     // Relación Uno a Muchos con Empleado: Un Puesto tiene muchos Empleados
-    public ICollection<Empleado> Empleados { get; }
+    public ICollection<Empleado> Empleados { get; } = new List<Empleado>();
 }

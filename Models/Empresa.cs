@@ -30,12 +30,19 @@ public class Empresa
     [Phone]
     public string Telefono { get; set; }
 
-    [Required] [EmailAddress] public string Email { get; set; }
+    [Required]
+    [EmailAddress]
+    public string Email { get; set; }
 
     [Display(Name = "Fecha de Registro")]
     [DataType(DataType.Date)]
-    public DateTime FechaRegistro { get; set; }
+    public DateTime FechaRegistro { get; set; } = DateTime.Now;
 
     // Relación Uno a Muchos con Area: Una Empresa tiene muchas Areas
-    public ICollection<Area> Areas { get; }
+    public ICollection<Area> Areas { get; } = new List<Area>();
+
+    public override string? ToString()
+    {
+        return $"{Nombre} - {CUIT}";
+    }
 }

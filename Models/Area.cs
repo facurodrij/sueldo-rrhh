@@ -13,8 +13,8 @@ public class Area
 
     // Relación Muchos a Uno con Empresa: Muchas Areas pertenecen a una Empresa
     public int EmpresaId { get; set; }
-    public Empresa Empresa { get; set; }
+    public Empresa? Empresa { get; set; }
 
     // Relación Uno a Muchos con Departamento: Un Area tiene muchos Departamentos
-    public ICollection<Departamento> Departamentos { get; }
+    public ICollection<Departamento> Departamentos { get; set; } = new List<Departamento>();
 }

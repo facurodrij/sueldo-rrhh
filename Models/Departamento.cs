@@ -13,8 +13,8 @@ public class Departamento
 
     // Relación Muchos a Uno con Area: Muchos Departamentos pertenecen a un Area
     public int AreaId { get; set; }
-    public Area Area { get; set; }
+    public Area? Area { get; set; }
 
     // Relación Uno a Muchos con Puesto: Un Departamento tiene muchos Puestos
-    public ICollection<Puesto> Puestos { get; }
+    public ICollection<Puesto> Puestos { get; } = new List<Puesto>();
 }
