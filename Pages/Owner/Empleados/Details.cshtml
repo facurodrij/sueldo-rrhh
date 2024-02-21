@@ -1,5 +1,5 @@
 @page
-@model sueldo_rrhh.Pages.Empleados.DetailsModel
+@model sueldo_rrhh.Pages.Owner.Empleados.DetailsModel
 
 @{
     ViewData["Title"] = "Details";
@@ -9,19 +9,19 @@
 
 <div>
     <h4>Empleado</h4>
-    <hr />
+    <hr/>
     <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Empleado.CUIL)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Empleado.CUIL)
-        </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Empleado.NombreCompleto)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Empleado.NombreCompleto)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Empleado.CUIL)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Empleado.CUIL)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Empleado.FechaNacimiento)
@@ -52,6 +52,12 @@
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Empleado.FechaEgreso)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Empleado.Puesto)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Empleado.Puesto.Descripcion)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Empleado.ApplicationUser)
