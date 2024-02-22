@@ -75,23 +75,34 @@ using (var scope = app.Services.CreateScope())
     // Seed database with initial roles
     if (!context.Roles.Any())
     {
-        await roleManager.CreateAsync(new IdentityRole("SuperAdmin"));
-        await roleManager.CreateAsync(new IdentityRole("Staff"));
-        await roleManager.CreateAsync(new IdentityRole("Owner"));
-        await roleManager.CreateAsync(new IdentityRole("SubOwner"));
+        await roleManager.CreateAsync(new IdentityRole("Admin"));
+        await roleManager.CreateAsync(new IdentityRole("Employee"));
     }
 
     // Seed database with an initial user
     if (!context.Users.Any())
     {
+        var persona = new Persona
+        {
+            NombreCompleto = "Admin",
+            CUIL = "20345678901",
+            FechaNacimiento = new DateTime(2000, 10, 18),
+            Genero = Genero.Masculino,
+            EstadoCivil = EstadoCivil.Soltero,
+            Domicilio = "Direccion 2",
+            Hijos = 0,
+            FechaIngreso = DateTime.Now
+        };
+
         var user = new ApplicationUser
         {
-            UserName = "superadmin@localhost",
-            Email = "superadmin@localhost",
-            EmailConfirmed = true
+            UserName = "admin@localhost",
+            Email = "admin@localhost",
+            EmailConfirmed = true,
+            Persona = persona
         };
         await userManager.CreateAsync(user, "181020");
-        await userManager.AddToRoleAsync(user, "SuperAdmin");
+        await userManager.AddToRoleAsync(user, "Admin");
     }
 
     // Seed database with an initial empresa

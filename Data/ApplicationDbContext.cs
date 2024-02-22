@@ -12,19 +12,13 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     }
 
     public DbSet<Empresa> Empresas { get; set; }
-    public DbSet<Area> Areas { get; set; }
-    public DbSet<Departamento> Departamentos { get; set; }
-    public DbSet<Puesto> Puestos { get; set; }
-    public DbSet<Empleado> Empleados { get; set; }
+    public DbSet<Persona> Personas { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
 
         modelBuilder.Entity<Empresa>().ToTable("Empresa");
-        modelBuilder.Entity<Area>().ToTable("Area");
-        modelBuilder.Entity<Departamento>().ToTable("Departamento");
-        modelBuilder.Entity<Puesto>().ToTable("Puesto");
-        modelBuilder.Entity<Empleado>().ToTable("Empleado");
+        modelBuilder.Entity<Persona>().ToTable("Persona");
     }
 }

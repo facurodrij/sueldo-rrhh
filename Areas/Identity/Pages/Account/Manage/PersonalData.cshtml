@@ -1,0 +1,70 @@
+@page
+@model sueldo_rrhh.Areas.Identity.Pages.Account.Manage.PersonalDataModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<h3>Datos Personales</h3>
+
+<p>
+    <strong>Nombre Completo:</strong>
+    @Model.Persona.NombreCompleto
+</p>
+
+<p>
+    <strong>CUIL:</strong>
+    @Model.Persona.CUIL
+</p>
+
+<p>
+    <strong>Fecha de Nacimiento:</strong>
+    @Model.Persona.FechaNacimiento.Date.ToString("dd/MM/yyyy")
+</p>
+
+<p>
+    <strong>Edad:</strong>
+    @(DateTime.Now.Year - Model.Persona.FechaNacimiento.Year)
+</p>
+
+<p>
+    <strong>Genero:</strong>
+    @Model.Persona.Genero
+</p>
+
+<p>
+    <strong>Estado Civil:</strong>
+    @Model.Persona.EstadoCivil
+</p>
+
+<p>
+    <strong>Domicilio:</strong>
+    @Model.Persona.Domicilio
+</p>
+
+<p>
+    <strong>Hijos:</strong>
+    @Model.Persona.Hijos
+</p>
+
+<p>
+    <strong>CVU:</strong>
+    @Model.Persona.CVU
+</p>
+
+<p>
+    <strong>CBU:</strong>
+    @Model.Persona.CBU
+</p>
+
+<p>
+    <strong>Fecha de Ingreso:</strong>
+    @Model.Persona.FechaIngreso.Date.ToString("dd/MM/yyyy")
+</p>
+
+@if (Model.Persona.FechaEgreso != null)
+{
+    <p>
+        <strong>Fecha de Egreso:</strong>
+        @Model.Persona.FechaEgreso.Value.Date.ToString("dd/MM/yyyy")
+    </p>
+}
+
+<a asp-page="/Admin/Personas/Edit" asp-route-id="@Model.Persona.Id" class="btn btn-primary">Editar</a>
