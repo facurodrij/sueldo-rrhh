@@ -1,0 +1,90 @@
+@page
+@using sueldo_rrhh.Models
+@model sueldo_rrhh.Pages.Admin.Personas.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Persona</h4>
+<hr/>
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Persona.NombreCompleto" class="control-label"></label>
+                <input asp-for="Persona.NombreCompleto" class="form-control"/>
+                <span asp-validation-for="Persona.NombreCompleto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Persona.CUIL" class="control-label"></label>
+                <input asp-for="Persona.CUIL" class="form-control"/>
+                <span asp-validation-for="Persona.CUIL" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Persona.FechaNacimiento" class="control-label"></label>
+                <input asp-for="Persona.FechaNacimiento" class="form-control"/>
+                <span asp-validation-for="Persona.FechaNacimiento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Persona.Genero" class="control-label"></label>
+                <select asp-for="Persona.Genero" class="form-control" asp-items="Html.GetEnumSelectList<Genero>()"></select>
+                <span asp-validation-for="Persona.Genero" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Persona.EstadoCivil" class="control-label"></label>
+                <select asp-for="Persona.EstadoCivil" class="form-control" asp-items="Html.GetEnumSelectList<EstadoCivil>()"></select>
+                <span asp-validation-for="Persona.EstadoCivil" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Persona.Domicilio" class="control-label"></label>
+                <input asp-for="Persona.Domicilio" class="form-control"/>
+                <span asp-validation-for="Persona.Domicilio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Persona.Hijos" class="control-label"></label>
+                <input asp-for="Persona.Hijos" class="form-control"/>
+                <span asp-validation-for="Persona.Hijos" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Persona.FechaIngreso" class="control-label"></label>
+                <input asp-for="Persona.FechaIngreso" class="form-control"/>
+                <span asp-validation-for="Persona.FechaIngreso" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Persona.FechaEgreso" class="control-label"></label>
+                <input asp-for="Persona.FechaEgreso" class="form-control"/>
+                <span asp-validation-for="Persona.FechaEgreso" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Persona.CVU" class="control-label"></label>
+                <input asp-for="Persona.CVU" class="form-control"/>
+                <span asp-validation-for="Persona.CVU" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Persona.CBU" class="control-label"></label>
+                <input asp-for="Persona.CBU" class="form-control"/>
+                <span asp-validation-for="Persona.CBU" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ApplicationUser.Email" class="control-label"></label>
+                <input asp-for="ApplicationUser.Email" class="form-control"/>
+                <span asp-validation-for="ApplicationUser.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
