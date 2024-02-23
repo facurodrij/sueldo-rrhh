@@ -1,26 +1,20 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using sueldo_rrhh.Data;
 using sueldo_rrhh.Models;
 
 namespace sueldo_rrhh.Pages.Admin.Personas
 {
     public class DeleteModel : PageModel
     {
-        private readonly sueldo_rrhh.Data.ApplicationDbContext _context;
+        private readonly Data.ApplicationDbContext _context;
 
-        public DeleteModel(sueldo_rrhh.Data.ApplicationDbContext context)
+        public DeleteModel(Data.ApplicationDbContext context)
         {
             _context = context;
         }
 
-        [BindProperty]
-        public Persona Persona { get; set; } = default!;
+        [BindProperty] public PersonaHistorial PersonaHistorial { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -29,16 +23,17 @@ namespace sueldo_rrhh.Pages.Admin.Personas
                 return NotFound();
             }
 
-            var persona = await _context.Personas.FirstOrDefaultAsync(m => m.Id == id);
+            var personaHistorial = await _context.PersonasHistorial
+                .Include(p => p.Persona)
+                .FirstOrDefaultAsync(m => m.Id == id);
 
-            if (persona == null)
+            if (personaHistorial == null)
             {
                 return NotFound();
             }
-            else
-            {
-                Persona = persona;
-            }
+
+            PersonaHistorial = personaHistorial;
+
             return Page();
         }
 
@@ -49,11 +44,13 @@ namespace sueldo_rrhh.Pages.Admin.Personas
                 return NotFound();
             }
 
-            var persona = await _context.Personas.FindAsync(id);
+            var personaHistorial = await _context.PersonasHistorial.FindAsync(id);
+
+            var persona = await _context.Personas.FindAsync(personaHistorial.PersonaId);
             if (persona != null)
             {
-                Persona = persona;
-                _context.Personas.Remove(Persona);
+                // Remove the persona from the database and cascade delete the historial
+                _context.Personas.Remove(persona);
                 await _context.SaveChangesAsync();
             }
 

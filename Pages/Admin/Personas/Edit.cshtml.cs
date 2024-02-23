@@ -1,10 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using sueldo_rrhh.Data;
 using sueldo_rrhh.Models;
@@ -13,15 +8,15 @@ namespace sueldo_rrhh.Pages.Admin.Personas
 {
     public class EditModel : PageModel
     {
-        private readonly sueldo_rrhh.Data.ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public EditModel(sueldo_rrhh.Data.ApplicationDbContext context)
+        public EditModel(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        [BindProperty]
-        public Persona Persona { get; set; } = default!;
+        [BindProperty] public PersonaHistorial PersonaHistorial { get; set; } = default!;
+
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -30,12 +25,17 @@ namespace sueldo_rrhh.Pages.Admin.Personas
                 return NotFound();
             }
 
-            var persona =  await _context.Personas.FirstOrDefaultAsync(m => m.Id == id);
-            if (persona == null)
+            var personaHistorial = await _context.PersonasHistorial
+                .Include(p => p.Persona)
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+            if (personaHistorial == null || personaHistorial.VigenteHasta != null) // Si el historial no existe o ya no es vigente
             {
                 return NotFound();
             }
-            Persona = persona;
+
+            PersonaHistorial = personaHistorial;
+
             return Page();
         }
 
@@ -48,15 +48,46 @@ namespace sueldo_rrhh.Pages.Admin.Personas
                 return Page();
             }
 
-            _context.Attach(Persona).State = EntityState.Modified;
-
             try
             {
+                // Actualizar el campo VigenteHasta del historial actual
+                var historialActual = await _context.PersonasHistorial
+                    .Include(p => p.Persona)
+                    .FirstOrDefaultAsync(m => m.Id == PersonaHistorial.Id);
+
+                if (historialActual != null)
+                {
+                    historialActual.VigenteHasta = DateTime.Now;
+                    _context.PersonasHistorial.Update(historialActual);
+                }
+
+                await _context.SaveChangesAsync();
+
+                // Crear un nuevo historial con los datos recibidos del formulario
+
+                var historialNuevo = new PersonaHistorial
+                {
+                    PersonaId = historialActual.PersonaId,
+                    NombreCompleto = PersonaHistorial.NombreCompleto,
+                    CUIL = PersonaHistorial.CUIL,
+                    FechaNacimiento = PersonaHistorial.FechaNacimiento,
+                    Genero = PersonaHistorial.Genero,
+                    EstadoCivil = PersonaHistorial.EstadoCivil,
+                    Domicilio = PersonaHistorial.Domicilio,
+                    Hijos = PersonaHistorial.Hijos,
+                    FechaIngreso = PersonaHistorial.FechaIngreso,
+                    FechaEgreso = PersonaHistorial.FechaEgreso,
+                    CVU = PersonaHistorial.CVU,
+                    CBU = PersonaHistorial.CBU
+                };
+
+                _context.PersonasHistorial.Add(historialNuevo);
+
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!PersonaExists(Persona.Id))
+                if (!PersonaHistorialExists(PersonaHistorial.Id))
                 {
                     return NotFound();
                 }
@@ -69,9 +100,9 @@ namespace sueldo_rrhh.Pages.Admin.Personas
             return RedirectToPage("./Index");
         }
 
-        private bool PersonaExists(int id)
+        private bool PersonaHistorialExists(int id)
         {
-            return _context.Personas.Any(e => e.Id == id);
+            return _context.PersonasHistorial.Any(e => e.Id == id);
         }
     }
 }

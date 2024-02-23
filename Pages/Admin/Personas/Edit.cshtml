@@ -14,61 +14,61 @@
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Persona.Id"/>
+            <input type="hidden" asp-for="PersonaHistorial.Id"/>
             <div class="form-group">
-                <label asp-for="Persona.NombreCompleto" class="control-label"></label>
-                <input asp-for="Persona.NombreCompleto" class="form-control"/>
-                <span asp-validation-for="Persona.NombreCompleto" class="text-danger"></span>
+                <label asp-for="PersonaHistorial.NombreCompleto" class="control-label"></label>
+                <input asp-for="PersonaHistorial.NombreCompleto" class="form-control"/>
+                <span asp-validation-for="PersonaHistorial.NombreCompleto" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Persona.CUIL" class="control-label"></label>
-                <input asp-for="Persona.CUIL" class="form-control"/>
-                <span asp-validation-for="Persona.CUIL" class="text-danger"></span>
+                <label asp-for="PersonaHistorial.CUIL" class="control-label"></label>
+                <input asp-for="PersonaHistorial.CUIL" class="form-control"/>
+                <span asp-validation-for="PersonaHistorial.CUIL" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Persona.FechaNacimiento" class="control-label"></label>
-                <input asp-for="Persona.FechaNacimiento" class="form-control"/>
-                <span asp-validation-for="Persona.FechaNacimiento" class="text-danger"></span>
+                <label asp-for="PersonaHistorial.FechaNacimiento" class="control-label"></label>
+                <input asp-for="PersonaHistorial.FechaNacimiento" class="form-control"/>
+                <span asp-validation-for="PersonaHistorial.FechaNacimiento" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Persona.Genero" class="control-label"></label>
-                <select asp-for="Persona.Genero" class="form-control" asp-items="Html.GetEnumSelectList<Genero>()"></select>
-                <span asp-validation-for="Persona.Genero" class="text-danger"></span>
+                <label asp-for="PersonaHistorial.Genero" class="control-label"></label>
+                <select asp-for="PersonaHistorial.Genero" class="form-control" asp-items="Html.GetEnumSelectList<Genero>()"></select>
+                <span asp-validation-for="PersonaHistorial.Genero" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Persona.EstadoCivil" class="control-label"></label>
-                <select asp-for="Persona.EstadoCivil" class="form-control" asp-items="Html.GetEnumSelectList<EstadoCivil>()"></select>
-                <span asp-validation-for="Persona.EstadoCivil" class="text-danger"></span>
+                <label asp-for="PersonaHistorial.EstadoCivil" class="control-label"></label>
+                <select asp-for="PersonaHistorial.EstadoCivil" class="form-control" asp-items="Html.GetEnumSelectList<EstadoCivil>()"></select>
+                <span asp-validation-for="PersonaHistorial.EstadoCivil" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Persona.Domicilio" class="control-label"></label>
-                <input asp-for="Persona.Domicilio" class="form-control"/>
-                <span asp-validation-for="Persona.Domicilio" class="text-danger"></span>
+                <label asp-for="PersonaHistorial.Domicilio" class="control-label"></label>
+                <input asp-for="PersonaHistorial.Domicilio" class="form-control"/>
+                <span asp-validation-for="PersonaHistorial.Domicilio" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Persona.Hijos" class="control-label"></label>
-                <input asp-for="Persona.Hijos" class="form-control"/>
-                <span asp-validation-for="Persona.Hijos" class="text-danger"></span>
+                <label asp-for="PersonaHistorial.Hijos" class="control-label"></label>
+                <input asp-for="PersonaHistorial.Hijos" class="form-control"/>
+                <span asp-validation-for="PersonaHistorial.Hijos" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Persona.FechaIngreso" class="control-label"></label>
-                <input asp-for="Persona.FechaIngreso" class="form-control"/>
-                <span asp-validation-for="Persona.FechaIngreso" class="text-danger"></span>
+                <label asp-for="PersonaHistorial.FechaIngreso" class="control-label"></label>
+                <input asp-for="PersonaHistorial.FechaIngreso" class="form-control"/>
+                <span asp-validation-for="PersonaHistorial.FechaIngreso" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Persona.FechaEgreso" class="control-label"></label>
-                <input asp-for="Persona.FechaEgreso" class="form-control"/>
-                <span asp-validation-for="Persona.FechaEgreso" class="text-danger"></span>
+                <label asp-for="PersonaHistorial.FechaEgreso" class="control-label"></label>
+                <input asp-for="PersonaHistorial.FechaEgreso" class="form-control"/>
+                <span asp-validation-for="PersonaHistorial.FechaEgreso" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Persona.CVU" class="control-label"></label>
-                <input asp-for="Persona.CVU" class="form-control"/>
-                <span asp-validation-for="Persona.CVU" class="text-danger"></span>
+                <label asp-for="PersonaHistorial.CVU" class="control-label"></label>
+                <input asp-for="PersonaHistorial.CVU" class="form-control"/>
+                <span asp-validation-for="PersonaHistorial.CVU" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Persona.CBU" class="control-label"></label>
-                <input asp-for="Persona.CBU" class="form-control"/>
-                <span asp-validation-for="Persona.CBU" class="text-danger"></span>
+                <label asp-for="PersonaHistorial.CBU" class="control-label"></label>
+                <input asp-for="PersonaHistorial.CBU" class="form-control"/>
+                <span asp-validation-for="PersonaHistorial.CBU" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary"/>

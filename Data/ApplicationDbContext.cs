@@ -13,6 +13,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 
     public DbSet<Empresa> Empresas { get; set; }
     public DbSet<Persona> Personas { get; set; }
+    public DbSet<PersonaHistorial> PersonasHistorial { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -20,5 +21,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 
         modelBuilder.Entity<Empresa>().ToTable("Empresa");
         modelBuilder.Entity<Persona>().ToTable("Persona");
+        modelBuilder.Entity<PersonaHistorial>().ToTable("PersonaHistorial");
     }
 }

@@ -1,11 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using sueldo_rrhh.Data;
 using sueldo_rrhh.Models;
 
@@ -13,10 +8,10 @@ namespace sueldo_rrhh.Pages.Admin.Personas
 {
     public class CreateModel : PageModel
     {
-        private readonly sueldo_rrhh.Data.ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public CreateModel(sueldo_rrhh.Data.ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        public CreateModel(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _userManager = userManager;
@@ -27,7 +22,7 @@ namespace sueldo_rrhh.Pages.Admin.Personas
             return Page();
         }
 
-        [BindProperty] public Persona Persona { get; set; } = default!;
+        [BindProperty] public PersonaHistorial PersonaHistorial { get; set; } = default!;
 
         [BindProperty] public ApplicationUser ApplicationUser { get; set; } = default!;
 
@@ -39,36 +34,43 @@ namespace sueldo_rrhh.Pages.Admin.Personas
                 return Page();
             }
 
-            if (ApplicationUser.Email == null)
+            await using var transaction = await _context.Database.BeginTransactionAsync();
+            try
             {
-                ModelState.AddModelError("ApplicationUser.Email", "El campo Email es requerido");
-                return Page();
-            }
+                var persona = _context.Personas.Add(new Persona()); // Create a new Persona
 
-            var emptyUser = new ApplicationUser();
-            // Crear usuario con pass aleatorio
-            var password = Guid.NewGuid().ToString();
-
-            emptyUser.Email = ApplicationUser.Email;
-            emptyUser.UserName = ApplicationUser.Email;
-            emptyUser.EmailConfirmed = true;
-
-
-            _context.Personas.Add(Persona);
-            await _context.SaveChangesAsync();
-
-            emptyUser.PersonaId = Persona.Id;
-            var result = await _userManager.CreateAsync(emptyUser, password);
-            if (!result.Succeeded)
-            {
-                foreach (var error in result.Errors)
+                var emptyUser = new ApplicationUser()
                 {
-                    ModelState.AddModelError(string.Empty, error.Description);
+                    Email = ApplicationUser.Email,
+                    UserName = ApplicationUser.Email,
+                    EmailConfirmed = true,
+                    Persona = persona.Entity
+                }; // Create a new ApplicationUser
+
+                var password = Guid.NewGuid().ToString(); // Generate a random password
+
+                // Create the ApplicationUser, if it fails, add the errors to Exception and throw it
+                var result = await _userManager.CreateAsync(emptyUser, password);
+                if (!result.Succeeded)
+                {
+                    throw new Exception(string.Join("\n", result.Errors.Select(e => e.Description)));
                 }
+
+                PersonaHistorial.Persona = persona.Entity; // Set the PersonaHistorial's Persona to the new Persona
+                _context.PersonasHistorial.Add(PersonaHistorial); // Add the PersonaHistorial to the context
+
+                await _context.SaveChangesAsync(); // Save the changes
+
+                await transaction.CommitAsync(); // Commit the transaction
+
+                return RedirectToPage("./Index");
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, ex.Message);
+                await transaction.RollbackAsync(); // Rollback the transaction
                 return Page();
             }
-
-            return RedirectToPage("./Index");
         }
     }
 }

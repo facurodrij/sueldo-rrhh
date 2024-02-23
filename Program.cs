@@ -82,8 +82,11 @@ using (var scope = app.Services.CreateScope())
     // Seed database with an initial user
     if (!context.Users.Any())
     {
-        var persona = new Persona
+        var persona = new Persona();
+
+        var personaHistorial = new PersonaHistorial
         {
+            Persona = persona,
             NombreCompleto = "Admin",
             CUIL = "20345678901",
             FechaNacimiento = new DateTime(2000, 10, 18),
@@ -93,6 +96,9 @@ using (var scope = app.Services.CreateScope())
             Hijos = 0,
             FechaIngreso = DateTime.Now
         };
+        context.Personas.Add(persona);
+        context.PersonasHistorial.Add(personaHistorial);
+        await context.SaveChangesAsync();
 
         var user = new ApplicationUser
         {

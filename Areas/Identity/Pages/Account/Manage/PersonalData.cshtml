@@ -6,65 +6,65 @@
 
 <p>
     <strong>Nombre Completo:</strong>
-    @Model.Persona.NombreCompleto
+    @Model.PersonaHistorial.NombreCompleto
 </p>
 
 <p>
     <strong>CUIL:</strong>
-    @Model.Persona.CUIL
+    @Model.PersonaHistorial.CUIL
 </p>
 
 <p>
     <strong>Fecha de Nacimiento:</strong>
-    @Model.Persona.FechaNacimiento.Date.ToString("dd/MM/yyyy")
+    @Model.PersonaHistorial.FechaNacimiento.Date.ToString("dd/MM/yyyy")
 </p>
 
 <p>
     <strong>Edad:</strong>
-    @(DateTime.Now.Year - Model.Persona.FechaNacimiento.Year)
+    @(DateTime.Now.Year - Model.PersonaHistorial.FechaNacimiento.Year)
 </p>
 
 <p>
     <strong>Genero:</strong>
-    @Model.Persona.Genero
+    @Model.PersonaHistorial.Genero
 </p>
 
 <p>
     <strong>Estado Civil:</strong>
-    @Model.Persona.EstadoCivil
+    @Model.PersonaHistorial.EstadoCivil
 </p>
 
 <p>
     <strong>Domicilio:</strong>
-    @Model.Persona.Domicilio
+    @Model.PersonaHistorial.Domicilio
 </p>
 
 <p>
     <strong>Hijos:</strong>
-    @Model.Persona.Hijos
+    @Model.PersonaHistorial.Hijos
 </p>
 
 <p>
     <strong>CVU:</strong>
-    @Model.Persona.CVU
+    @Model.PersonaHistorial.CVU
 </p>
 
 <p>
     <strong>CBU:</strong>
-    @Model.Persona.CBU
+    @Model.PersonaHistorial.CBU
 </p>
 
 <p>
     <strong>Fecha de Ingreso:</strong>
-    @Model.Persona.FechaIngreso.Date.ToString("dd/MM/yyyy")
+    @Model.PersonaHistorial.FechaIngreso.Date.ToString("dd/MM/yyyy")
 </p>
 
-@if (Model.Persona.FechaEgreso != null)
+@if (Model.PersonaHistorial.FechaEgreso != null)
 {
     <p>
         <strong>Fecha de Egreso:</strong>
-        @Model.Persona.FechaEgreso.Value.Date.ToString("dd/MM/yyyy")
+        @Model.PersonaHistorial.FechaEgreso.Value.Date.ToString("dd/MM/yyyy")
     </p>
 }
 
-<a asp-page="/Admin/Personas/Edit" asp-route-id="@Model.Persona.Id" class="btn btn-primary">Editar</a>
+<a asp-page="/Admin/Personas/Edit" asp-route-id="@Model.PersonaHistorial.Id" class="btn btn-primary">Editar</a>

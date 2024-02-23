@@ -7,6 +7,42 @@ public class Persona
 {
     public int Id { get; set; }
 
+    public ApplicationUser? User { get; set; }
+
+    public ICollection<PersonaHistorial> Historial { get; set; } = new List<PersonaHistorial>();
+}
+
+public enum Genero
+{
+    Masculino,
+    Femenino,
+    Otro
+}
+
+public enum EstadoCivil
+{
+    Soltero,
+    Casado,
+    Divorciado,
+    Viudo
+}
+
+public class PersonaHistorial
+{
+    public int Id { get; set; }
+
+    public int PersonaId { get; set; }
+    public Persona? Persona { get; set; }
+
+    [Display(Name = "Vigente Desde")]
+    [Required]
+    [DataType(DataType.DateTime)]
+    public DateTime VigenteDesde { get; set; } = DateTime.Now;
+
+    [Display(Name = "Vigente Hasta")]
+    [DataType(DataType.DateTime)]
+    public DateTime? VigenteHasta { get; set; }
+
     [Display(Name = "Nombre Completo")]
     [Required]
     [StringLength(100, MinimumLength = 3)]
@@ -56,21 +92,4 @@ public class Persona
     [Display(Name = "CBU")]
     [StringLength(22, MinimumLength = 22)]
     public string? CBU { get; set; }
-
-    public ApplicationUser? User { get; set; }
-}
-
-public enum Genero
-{
-    Masculino,
-    Femenino,
-    Otro
-}
-
-public enum EstadoCivil
-{
-    Soltero,
-    Casado,
-    Divorciado,
-    Viudo
 }

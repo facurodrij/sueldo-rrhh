@@ -14,43 +14,43 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Persona[0].NombreCompleto)
+                @Html.DisplayNameFor(model => model.PersonaHistorial[0].NombreCompleto)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Persona[0].CUIL)
+                @Html.DisplayNameFor(model => model.PersonaHistorial[0].CUIL)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Persona[0].FechaNacimiento)
+                @Html.DisplayNameFor(model => model.PersonaHistorial[0].FechaNacimiento)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Persona[0].Genero)
+                @Html.DisplayNameFor(model => model.PersonaHistorial[0].Genero)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Persona[0].EstadoCivil)
+                @Html.DisplayNameFor(model => model.PersonaHistorial[0].EstadoCivil)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Persona[0].Domicilio)
+                @Html.DisplayNameFor(model => model.PersonaHistorial[0].Domicilio)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Persona[0].Hijos)
+                @Html.DisplayNameFor(model => model.PersonaHistorial[0].Hijos)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Persona[0].FechaIngreso)
+                @Html.DisplayNameFor(model => model.PersonaHistorial[0].FechaIngreso)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Persona[0].FechaEgreso)
+                @Html.DisplayNameFor(model => model.PersonaHistorial[0].FechaEgreso)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Persona[0].CVU)
+                @Html.DisplayNameFor(model => model.PersonaHistorial[0].CVU)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Persona[0].CBU)
+                @Html.DisplayNameFor(model => model.PersonaHistorial[0].CBU)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Persona) {
+@foreach (var item in Model.PersonaHistorial) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.NombreCompleto)

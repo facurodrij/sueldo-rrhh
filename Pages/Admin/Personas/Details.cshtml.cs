@@ -1,25 +1,20 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using sueldo_rrhh.Data;
 using sueldo_rrhh.Models;
 
 namespace sueldo_rrhh.Pages.Admin.Personas
 {
     public class DetailsModel : PageModel
     {
-        private readonly sueldo_rrhh.Data.ApplicationDbContext _context;
+        private readonly Data.ApplicationDbContext _context;
 
-        public DetailsModel(sueldo_rrhh.Data.ApplicationDbContext context)
+        public DetailsModel(Data.ApplicationDbContext context)
         {
             _context = context;
         }
 
-        public Persona Persona { get; set; } = default!;
+        public PersonaHistorial PersonaHistorial { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -28,15 +23,17 @@ namespace sueldo_rrhh.Pages.Admin.Personas
                 return NotFound();
             }
 
-            var persona = await _context.Personas.FirstOrDefaultAsync(m => m.Id == id);
-            if (persona == null)
+            var personaHistorial = await _context.PersonasHistorial
+                .Include(p => p.Persona)
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+            if (personaHistorial == null)
             {
                 return NotFound();
             }
-            else
-            {
-                Persona = persona;
-            }
+
+            PersonaHistorial = personaHistorial;
+
             return Page();
         }
     }

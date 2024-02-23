@@ -13,7 +13,7 @@ namespace sueldo_rrhh.Areas.Identity.Pages.Account.Manage
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ApplicationDbContext _context;
 
-        public Persona Persona { get; set; }
+        public PersonaHistorial PersonaHistorial { get; set; }
 
         public PersonalDataModel(UserManager<ApplicationUser> userManager, ApplicationDbContext context)
         {
@@ -29,10 +29,14 @@ namespace sueldo_rrhh.Areas.Identity.Pages.Account.Manage
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
-            Persona = await _context.Personas.FirstOrDefaultAsync(p => p.User.Id == user.Id);
-            if (Persona == null)
+            PersonaHistorial = await _context.PersonasHistorial
+                .Include(p => p.Persona)
+                .Where(p => p.VigenteHasta == null)
+                .FirstOrDefaultAsync();
+
+            if (PersonaHistorial == null)
             {
-                return NotFound($"Unable to load Persona data for user with ID '{user.Id}'.");
+                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
             return Page();

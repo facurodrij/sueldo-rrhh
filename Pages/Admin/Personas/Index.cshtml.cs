@@ -19,11 +19,15 @@ namespace sueldo_rrhh.Pages.Admin.Personas
             _context = context;
         }
 
-        public IList<Persona> Persona { get;set; } = default!;
+        public IList<PersonaHistorial> PersonaHistorial { get; set; } = default!;
 
         public async Task OnGetAsync()
         {
-            Persona = await _context.Personas.ToListAsync();
+            // Get the only last PersonaHistorial from the context
+            PersonaHistorial = await _context.PersonasHistorial
+                .Include(p => p.Persona)
+                .Where(p => p.VigenteHasta == null)
+                .ToListAsync();
         }
     }
 }
