@@ -9,42 +9,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <None Update="app.db" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true"/>
-    </ItemGroup>
-
-    <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.2"/>
         <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.2"/>
         <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.2"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.2"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.2"/>
-        <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.1" />
+        <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.1"/>
     </ItemGroup>
-
-    <ItemGroup>
-      <_ContentIncludedByDefault Remove="Pages\Areas\Create.cshtml" />
-      <_ContentIncludedByDefault Remove="Pages\Areas\Delete.cshtml" />
-      <_ContentIncludedByDefault Remove="Pages\Areas\Details.cshtml" />
-      <_ContentIncludedByDefault Remove="Pages\Areas\Edit.cshtml" />
-      <_ContentIncludedByDefault Remove="Pages\Areas\Index.cshtml" />
-      <_ContentIncludedByDefault Remove="Pages\Departamentos\Create.cshtml" />
-      <_ContentIncludedByDefault Remove="Pages\Departamentos\Delete.cshtml" />
-      <_ContentIncludedByDefault Remove="Pages\Departamentos\Details.cshtml" />
-      <_ContentIncludedByDefault Remove="Pages\Departamentos\Edit.cshtml" />
-      <_ContentIncludedByDefault Remove="Pages\Departamentos\Index.cshtml" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <AdditionalFiles Include="Pages\Empresas\Areas\Create.cshtml" />
-      <AdditionalFiles Include="Pages\Empresas\Areas\Delete.cshtml" />
-      <AdditionalFiles Include="Pages\Empresas\Areas\Details.cshtml" />
-      <AdditionalFiles Include="Pages\Empresas\Areas\Edit.cshtml" />
-      <AdditionalFiles Include="Pages\Empresas\Areas\Index.cshtml" />
-      <AdditionalFiles Include="Pages\Empresas\Departamentos\Create.cshtml" />
-      <AdditionalFiles Include="Pages\Empresas\Departamentos\Delete.cshtml" />
-      <AdditionalFiles Include="Pages\Empresas\Departamentos\Details.cshtml" />
-      <AdditionalFiles Include="Pages\Empresas\Departamentos\Edit.cshtml" />
-      <AdditionalFiles Include="Pages\Empresas\Departamentos\Index.cshtml" />
-    </ItemGroup>
-
 </Project>
