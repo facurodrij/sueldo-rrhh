@@ -15,6 +15,11 @@ public class Empresa
     [StringLength(100, MinimumLength = 3)]
     public string Nombre { get; set; }
 
+    [Display(Name = "Razón Social")]
+    [Required]
+    [StringLength(100, MinimumLength = 3)]
+    public string RazonSocial { get; set; }
+
     [Display(Name = "Categoría")]
     [Required]
     [StringLength(100, MinimumLength = 3)]

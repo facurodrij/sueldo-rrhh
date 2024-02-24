@@ -9,7 +9,17 @@ public class Persona
 
     public ApplicationUser? User { get; set; }
 
-    public ICollection<PersonaHistorial> Historial { get; set; } = new List<PersonaHistorial>();
+    public ICollection<PersonaHistorial> PersonaHistorials { get; set; } = new List<PersonaHistorial>();
+
+    public override string? ToString()
+    {
+        return $"{PersonaHistorials.Last().NombreCompleto} - {PersonaHistorials.Last().CUIL}";
+    }
+
+    public string ToDisplay
+    {
+        get { return $"{PersonaHistorials.Last().NombreCompleto} - {PersonaHistorials.Last().CUIL}"; }
+    }
 }
 
 public enum Genero
@@ -57,9 +67,7 @@ public class PersonaHistorial
     [DataType(DataType.Date)]
     public DateTime FechaNacimiento { get; set; }
 
-    [Display(Name = "Género")]
-    [Required]
-    public Genero Genero { get; set; }
+    [Display(Name = "Género")] [Required] public Genero Genero { get; set; }
 
     [Display(Name = "Estado Civil")]
     [Required]

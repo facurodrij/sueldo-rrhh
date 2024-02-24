@@ -70,62 +70,22 @@ using (var scope = app.Services.CreateScope())
     var context = services.GetRequiredService<ApplicationDbContext>();
     var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
     var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
-    await context.Database.MigrateAsync();
 
-    // Seed database with initial roles
-    if (!context.Roles.Any())
+    // Seed database with an initial user
+    if (!context.Users.Any() && !context.Roles.Any())
     {
         await roleManager.CreateAsync(new IdentityRole("Admin"));
         await roleManager.CreateAsync(new IdentityRole("Employee"));
-    }
-
-    // Seed database with an initial user
-    if (!context.Users.Any())
-    {
-        var persona = new Persona();
-
-        var personaHistorial = new PersonaHistorial
-        {
-            Persona = persona,
-            NombreCompleto = "Admin",
-            CUIL = "20345678901",
-            FechaNacimiento = new DateTime(2000, 10, 18),
-            Genero = Genero.Masculino,
-            EstadoCivil = EstadoCivil.Soltero,
-            Domicilio = "Direccion 2",
-            Hijos = 0,
-            FechaIngreso = DateTime.Now
-        };
-        context.Personas.Add(persona);
-        context.PersonasHistorial.Add(personaHistorial);
-        await context.SaveChangesAsync();
 
         var user = new ApplicationUser
         {
             UserName = "admin@localhost",
             Email = "admin@localhost",
             EmailConfirmed = true,
-            Persona = persona
+            PersonaId = 1
         };
         await userManager.CreateAsync(user, "181020");
         await userManager.AddToRoleAsync(user, "Admin");
-    }
-
-    // Seed database with an initial empresa
-    if (!context.Empresas.Any())
-    {
-        var empresa = new Empresa
-        {
-            CUIT = "12345678901",
-            Nombre = "StockCar",
-            Categoria = "Comercio",
-            Direccion = "Direccion 1",
-            Telefono = "123456789",
-            Email = "stockcar@localhost",
-            FechaRegistro = DateTime.Now
-        };
-        context.Empresas.Add(empresa);
-        await context.SaveChangesAsync();
     }
 }
 
