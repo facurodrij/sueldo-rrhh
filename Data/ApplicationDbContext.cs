@@ -14,12 +14,12 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<Empresa> Empresas { get; set; }
     public DbSet<Persona> Personas { get; set; }
     public DbSet<PersonaHistorial> PersonasHistorial { get; set; }
-
     public DbSet<Convenio> Convenios { get; set; }
-
     public DbSet<CategoriaConvenio> CategoriasConvenio { get; set; }
-
     public DbSet<Contrato> Contratos { get; set; }
+    public DbSet<HoraExtra> HorasExtras { get; set; }
+    public DbSet<Feriado> Feriados { get; set; }
+    public DbSet<FeriadoTrabajado> FeriadosTrabajados { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -31,6 +31,9 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         modelBuilder.Entity<Convenio>().ToTable("Convenio");
         modelBuilder.Entity<CategoriaConvenio>().ToTable("CategoriaConvenio");
         modelBuilder.Entity<Contrato>().ToTable("Contrato");
+        modelBuilder.Entity<Feriado>().ToTable("Feriado");
+        modelBuilder.Entity<HoraExtra>().ToTable("HoraExtra");
+        modelBuilder.Entity<FeriadoTrabajado>().ToTable("FeriadoTrabajado");
 
         modelBuilder.Entity<Empresa>().HasIndex(e => e.CUIT).IsUnique();
         modelBuilder.Entity<Empresa>().HasData(
@@ -84,6 +87,18 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
             new CategoriaConvenio { Id = 19, Nombre = "Vendedor", Agrupamiento = 'B', ConvenioId = 1 },
             new CategoriaConvenio { Id = 20, Nombre = "Vendedor", Agrupamiento = 'C', ConvenioId = 1 },
             new CategoriaConvenio { Id = 21, Nombre = "Vendedor", Agrupamiento = 'D', ConvenioId = 1 }
+        );
+
+        modelBuilder.Entity<Feriado>().HasData(
+            new Feriado { Id = 1, Fecha = new DateTime(2021, 1, 1), Motivo = "Año Nuevo", EsNacional = true },
+            new Feriado { Id = 2, Fecha = new DateTime(2021, 2, 15), Motivo = "Carnaval", EsNacional = false },
+            new Feriado { Id = 3, Fecha = new DateTime(2024, 2, 13), Motivo = "Carnaval", EsNacional = false },
+            new Feriado { Id = 4, Fecha = new DateTime(2024, 3, 24), Motivo = "Día de la Memoria por la Verdad y la Justicia", EsNacional = true },
+            new Feriado { Id = 5, Fecha = new DateTime(2024, 3, 28), Motivo = "Jueves Santo", EsNacional = false },
+            new Feriado { Id = 6, Fecha = new DateTime(2024, 3, 29), Motivo = "Viernes Santo", EsNacional = false },
+            new Feriado { Id = 7, Fecha = new DateTime(2024, 4, 2), Motivo = "Día del Veterano y de los Caídos en la Guerra de Malvinas", EsNacional = true },
+            new Feriado { Id = 8, Fecha = new DateTime(2024, 5, 1), Motivo = "Día del Trabajador", EsNacional = true },
+            new Feriado { Id = 9, Fecha = new DateTime(2024, 5, 25), Motivo = "Día de la Revolución de Mayo", EsNacional = true }
         );
     }
 }

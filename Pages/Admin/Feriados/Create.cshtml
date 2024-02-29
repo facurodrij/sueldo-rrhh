@@ -1,0 +1,44 @@
+@page
+@model sueldo_rrhh.Pages.Admin.Feriados.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Feriado</h4>
+<hr/>
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Feriado.Fecha" class="control-label"></label>
+                <input asp-for="Feriado.Fecha" class="form-control"/>
+                <span asp-validation-for="Feriado.Fecha" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Feriado.Motivo" class="control-label"></label>
+                <input asp-for="Feriado.Motivo" class="form-control"/>
+                <span asp-validation-for="Feriado.Motivo" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Feriado.EsNacional"/> @Html.DisplayNameFor(model => model.Feriado.EsNacional)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

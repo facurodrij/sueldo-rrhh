@@ -1,10 +1,14 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using sueldo_rrhh.Data;
 using sueldo_rrhh.Models;
 
-namespace sueldo_rrhh.Pages.Admin.Contratos;
+namespace sueldo_rrhh.Pages.Admin.HorasExtras;
 
 public class DeleteModel : PageModel
 {
@@ -15,21 +19,18 @@ public class DeleteModel : PageModel
         _context = context;
     }
 
-    [BindProperty] public Contrato Contrato { get; set; } = default!;
+    [BindProperty] public HoraExtra HoraExtra { get; set; } = default!;
 
     public async Task<IActionResult> OnGetAsync(int? id)
     {
         if (id == null) return NotFound();
 
-        var contrato = await _context.Contratos.Include(c => c.CategoriaConvenio)
-            .Include(c => c.Persona)
-            .ThenInclude(p => p.PersonaHistorials)
-            .FirstOrDefaultAsync(m => m.Id == id);
+        var horaextra = await _context.HorasExtras.FirstOrDefaultAsync(m => m.Id == id);
 
-        if (contrato == null)
+        if (horaextra == null)
             return NotFound();
         else
-            Contrato = contrato;
+            HoraExtra = horaextra;
         return Page();
     }
 
@@ -37,11 +38,11 @@ public class DeleteModel : PageModel
     {
         if (id == null) return NotFound();
 
-        var contrato = await _context.Contratos.FindAsync(id);
-        if (contrato != null)
+        var horaextra = await _context.HorasExtras.FindAsync(id);
+        if (horaextra != null)
         {
-            Contrato = contrato;
-            _context.Contratos.Remove(Contrato);
+            HoraExtra = horaextra;
+            _context.HorasExtras.Remove(HoraExtra);
             await _context.SaveChangesAsync();
         }
 

@@ -1,10 +1,14 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using sueldo_rrhh.Data;
 using sueldo_rrhh.Models;
 
-namespace sueldo_rrhh.Pages.Admin.Contratos;
+namespace sueldo_rrhh.Pages.Admin.Feriados;
 
 public class DetailsModel : PageModel
 {
@@ -15,21 +19,17 @@ public class DetailsModel : PageModel
         _context = context;
     }
 
-    public Contrato Contrato { get; set; } = default!;
+    public Feriado Feriado { get; set; } = default!;
 
     public async Task<IActionResult> OnGetAsync(int? id)
     {
         if (id == null) return NotFound();
 
-        var contrato = await _context.Contratos.Include(c => c.CategoriaConvenio)
-            .Include(c => c.Persona)
-            .ThenInclude(p => p.PersonaHistorials)
-            .FirstOrDefaultAsync(m => m.Id == id);
-
-        if (contrato == null)
+        var feriado = await _context.Feriados.FirstOrDefaultAsync(m => m.Id == id);
+        if (feriado == null)
             return NotFound();
         else
-            Contrato = contrato;
+            Feriado = feriado;
         return Page();
     }
 }

@@ -6,7 +6,7 @@ public class Contrato
 {
     public int Id { get; set; }
 
-    public int PersonaId { get; set; }
+    [Display(Name = "Persona")] public int PersonaId { get; set; }
     public Persona? Persona { get; set; }
 
     [Display(Name = "Categoría de Convenio")]
@@ -26,10 +26,16 @@ public class Contrato
 
     [Display(Name = "Horas Semanales")]
     [Required]
-    [Range(4, 48)]
-    public int HorasSemanales { get; set; } = 48;
+    public HorasSemanales HorasSemanales { get; set; }
 
-    // Metodo para determinar si el contrato esta activo
+    public ICollection<HoraExtra> HorasExtras { get; set; } = new List<HoraExtra>();
+
+    public ICollection<FeriadoTrabajado> FeriadosTrabajados { get; set; } = new List<FeriadoTrabajado>();
+
+    // public ICollection<Recibo> Recibos { get; set; } = new List<Recibo>();
+
+
+
     public bool Activo()
     {
         return FechaFin == null || FechaFin > DateTime.Now;
@@ -39,4 +45,10 @@ public class Contrato
     {
         return $"{Persona?.PersonaHistorials.Last().NombreCompleto} - {CategoriaConvenio?.Nombre}";
     }
+}
+
+public enum HorasSemanales
+{
+    [Display(Name = "Jornada Parcial (32 hs)")] Parcial = 32,
+    [Display(Name = "Jornada Completa (48 hs)")] Completa = 48
 }
