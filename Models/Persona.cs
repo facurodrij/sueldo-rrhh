@@ -9,7 +9,12 @@ public class Persona
 
     public ApplicationUser? User { get; set; }
 
+    public Contrato? Contrato { get; set; }
+
     public ICollection<PersonaHistorial> PersonaHistorials { get; set; } = new List<PersonaHistorial>();
+    // public ICollection<Solicitud> Solicitudes { get; set; } = new List<Solicitud>();
+    // public ICollection<Vacaciones> Vacaciones { get; set; } = new List<Vacaciones>();
+
 
     public override string? ToString()
     {
