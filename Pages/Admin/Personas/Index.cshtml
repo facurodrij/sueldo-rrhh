@@ -12,45 +12,46 @@
 </p>
 <table class="table">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.PersonaHistorial[0].NombreCompleto)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PersonaHistorial[0].CUIL)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PersonaHistorial[0].FechaNacimiento)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PersonaHistorial[0].Genero)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PersonaHistorial[0].EstadoCivil)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PersonaHistorial[0].Domicilio)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PersonaHistorial[0].Hijos)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PersonaHistorial[0].FechaIngreso)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PersonaHistorial[0].FechaEgreso)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PersonaHistorial[0].CVU)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PersonaHistorial[0].CBU)
-            </th>
-            <th></th>
-        </tr>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PersonaHistorial[0].NombreCompleto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PersonaHistorial[0].CUIL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PersonaHistorial[0].FechaNacimiento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PersonaHistorial[0].Genero)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PersonaHistorial[0].EstadoCivil)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PersonaHistorial[0].Domicilio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PersonaHistorial[0].Hijos)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PersonaHistorial[0].FechaIngreso)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PersonaHistorial[0].FechaEgreso)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PersonaHistorial[0].CVU)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PersonaHistorial[0].CBU)
+        </th>
+        <th></th>
+    </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.PersonaHistorial) {
+    @foreach (var item in Model.PersonaHistorial)
+    {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.NombreCompleto)
@@ -91,6 +92,6 @@
                 <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
-}
+    }
     </tbody>
 </table>

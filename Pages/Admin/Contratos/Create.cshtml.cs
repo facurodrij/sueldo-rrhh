@@ -1,7 +1,10 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using sueldo_rrhh.Data;
 using sueldo_rrhh.Models;
 
@@ -18,9 +21,8 @@ public class CreateModel : PageModel
 
     public IActionResult OnGet()
     {
-        ViewData["CategoriaConvenioId"] = new SelectList(_context.CategoriasConvenio, "Id", "ToDisplay");
-        ViewData["PersonaId"] =
-            new SelectList(_context.Personas.Include(p => p.PersonaHistorials), "Id", "ToDisplay");
+        ViewData["CategoriaConvenioId"] = new SelectList(_context.CategoriasConvenio, "Id", "Nombre");
+        ViewData["PersonaId"] = new SelectList(_context.Personas, "Id", "Id");
         return Page();
     }
 
@@ -29,13 +31,7 @@ public class CreateModel : PageModel
     // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
     public async Task<IActionResult> OnPostAsync()
     {
-        if (!ModelState.IsValid)
-        {
-            ViewData["CategoriaConvenioId"] = new SelectList(_context.CategoriasConvenio, "Id", "ToDisplay");
-            ViewData["PersonaId"] =
-                new SelectList(_context.Personas.Include(p => p.PersonaHistorials), "Id", "ToDisplay");
-            return Page();
-        }
+        if (!ModelState.IsValid) return Page();
 
         _context.Contratos.Add(Contrato);
         await _context.SaveChangesAsync();

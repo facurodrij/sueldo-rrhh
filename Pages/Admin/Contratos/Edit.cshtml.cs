@@ -1,3 +1,7 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -25,9 +29,8 @@ public class EditModel : PageModel
         var contrato = await _context.Contratos.FirstOrDefaultAsync(m => m.Id == id);
         if (contrato == null) return NotFound();
         Contrato = contrato;
-        ViewData["CategoriaConvenioId"] = new SelectList(_context.CategoriasConvenio, "Id", "ToDisplay");
-        ViewData["PersonaId"] =
-            new SelectList(_context.Personas.Include(p => p.PersonaHistorials), "Id", "ToDisplay");
+        ViewData["CategoriaConvenioId"] = new SelectList(_context.CategoriasConvenio, "Id", "Nombre");
+        ViewData["PersonaId"] = new SelectList(_context.Personas, "Id", "Id");
         return Page();
     }
 
@@ -35,13 +38,7 @@ public class EditModel : PageModel
     // For more details, see https://aka.ms/RazorPagesCRUD.
     public async Task<IActionResult> OnPostAsync()
     {
-        if (!ModelState.IsValid)
-        {
-            ViewData["CategoriaConvenioId"] = new SelectList(_context.CategoriasConvenio, "Id", "ToDisplay");
-            ViewData["PersonaId"] =
-                new SelectList(_context.Personas.Include(p => p.PersonaHistorials), "Id", "ToDisplay");
-            return Page();
-        }
+        if (!ModelState.IsValid) return Page();
 
         _context.Attach(Contrato).State = EntityState.Modified;
 
