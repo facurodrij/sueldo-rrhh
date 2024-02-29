@@ -28,6 +28,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Contrato[0].HorasSemanales)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Contrato[0].AdicionalEmpresa)
+        </th>
         <th></th>
     </tr>
     </thead>
@@ -49,6 +52,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.HorasSemanales)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AdicionalEmpresa)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |

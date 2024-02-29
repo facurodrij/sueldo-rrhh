@@ -28,13 +28,15 @@ public class Contrato
     [Required]
     public HorasSemanales HorasSemanales { get; set; }
 
+    [Display(Name = "Adicional de Empresa")]
+    [DisplayFormat(DataFormatString = "{0:C}")]
+    public double? AdicionalEmpresa { get; set; }
+
     public ICollection<HoraExtra> HorasExtras { get; set; } = new List<HoraExtra>();
 
     public ICollection<FeriadoTrabajado> FeriadosTrabajados { get; set; } = new List<FeriadoTrabajado>();
 
     // public ICollection<Recibo> Recibos { get; set; } = new List<Recibo>();
-
-
 
     public bool Activo()
     {
