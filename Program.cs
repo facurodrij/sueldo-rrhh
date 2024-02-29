@@ -75,7 +75,8 @@ using (var scope = app.Services.CreateScope())
     if (!context.Users.Any() && !context.Roles.Any())
     {
         await roleManager.CreateAsync(new IdentityRole("Admin"));
-        await roleManager.CreateAsync(new IdentityRole("Employee"));
+        // await roleManager.CreateAsync(new IdentityRole("Empleado"));
+        // Este rol será controlado mediante el Contrato, si el usuario tiene un contrato activo, tendrá este rol
 
         var user = new ApplicationUser
         {
