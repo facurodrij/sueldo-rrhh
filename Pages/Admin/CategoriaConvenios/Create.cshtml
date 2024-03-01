@@ -28,6 +28,11 @@
                 <select asp-for="CategoriaConvenio.ConvenioId" class="form-control" asp-items="ViewBag.ConvenioId"></select>
             </div>
             <div class="form-group">
+                <label asp-for="CategoriaConvenio.SueldoBasico" class="control-label"></label>
+                <input asp-for="CategoriaConvenio.SueldoBasico" class="form-control"/>
+                <span asp-validation-for="CategoriaConvenio.SueldoBasico" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary"/>
             </div>
         </form>

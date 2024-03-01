@@ -1,4 +1,9 @@
 using System.ComponentModel.DataAnnotations;
+using System.Configuration;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using sueldo_rrhh.Data;
+using ConfigurationManager = System.Configuration.ConfigurationManager;
 
 namespace sueldo_rrhh.Models;
 
@@ -14,6 +19,11 @@ public class CategoriaConvenio
     [Display(Name = "Agrupamiento")]
     [Required]
     public char Agrupamiento { get; set; }
+
+    [Display(Name = "Suelo Básico")]
+    [DisplayFormat(DataFormatString = "{0:C}")]
+    [Required]
+    public double SueldoBasico { get; set; }
 
     public int ConvenioId { get; set; }
     public Convenio? Convenio { get; set; }
