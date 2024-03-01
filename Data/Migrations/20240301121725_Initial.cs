@@ -61,6 +61,35 @@ namespace sueldo_rrhh.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Feriado",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Fecha = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Motivo = table.Column<string>(type: "TEXT", nullable: true),
+                    EsNacional = table.Column<bool>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Feriado", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Parametro",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Nombre = table.Column<string>(type: "TEXT", nullable: false),
+                    Valor = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Parametro", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Persona",
                 columns: table => new
                 {
@@ -101,6 +130,7 @@ namespace sueldo_rrhh.Data.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Nombre = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
                     Agrupamiento = table.Column<char>(type: "TEXT", nullable: false),
+                    SueldoBasico = table.Column<double>(type: "REAL", nullable: false),
                     ConvenioId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
@@ -108,6 +138,29 @@ namespace sueldo_rrhh.Data.Migrations
                     table.PrimaryKey("PK_CategoriaConvenio", x => x.Id);
                     table.ForeignKey(
                         name: "FK_CategoriaConvenio_Convenio_ConvenioId",
+                        column: x => x.ConvenioId,
+                        principalTable: "Convenio",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Conceptos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Nombre = table.Column<string>(type: "TEXT", nullable: false),
+                    Fecha = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    Valor = table.Column<double>(type: "REAL", nullable: false),
+                    Remunerativo = table.Column<bool>(type: "INTEGER", nullable: false),
+                    ConvenioId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Conceptos", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Conceptos_Convenio_ConvenioId",
                         column: x => x.ConvenioId,
                         principalTable: "Convenio",
                         principalColumn: "Id",
@@ -188,7 +241,9 @@ namespace sueldo_rrhh.Data.Migrations
                     CategoriaConvenioId = table.Column<int>(type: "INTEGER", nullable: false),
                     FechaInicio = table.Column<DateTime>(type: "TEXT", nullable: false),
                     FechaFin = table.Column<DateTime>(type: "TEXT", nullable: true),
-                    HorasSemanales = table.Column<int>(type: "INTEGER", nullable: false)
+                    HorasSemanales = table.Column<int>(type: "INTEGER", nullable: false),
+                    AdicionalEmpresa = table.Column<double>(type: "REAL", nullable: true),
+                    EmpresaId = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -199,6 +254,11 @@ namespace sueldo_rrhh.Data.Migrations
                         principalTable: "CategoriaConvenio",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Contrato_Empresa_EmpresaId",
+                        column: x => x.EmpresaId,
+                        principalTable: "Empresa",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Contrato_Persona_PersonaId",
                         column: x => x.PersonaId,
@@ -292,6 +352,54 @@ namespace sueldo_rrhh.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "FeriadoTrabajado",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ContratoId = table.Column<int>(type: "INTEGER", nullable: false),
+                    FeriadoId = table.Column<int>(type: "INTEGER", nullable: false),
+                    HorasTrabajadas = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FeriadoTrabajado", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_FeriadoTrabajado_Contrato_ContratoId",
+                        column: x => x.ContratoId,
+                        principalTable: "Contrato",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_FeriadoTrabajado_Feriado_FeriadoId",
+                        column: x => x.FeriadoId,
+                        principalTable: "Feriado",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "HoraExtra",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Fecha = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Horas = table.Column<int>(type: "INTEGER", nullable: false),
+                    ContratoId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_HoraExtra", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_HoraExtra_Contrato_ContratoId",
+                        column: x => x.ContratoId,
+                        principalTable: "Contrato",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "Convenio",
                 columns: new[] { "Id", "Nombre" },
@@ -300,7 +408,28 @@ namespace sueldo_rrhh.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Empresa",
                 columns: new[] { "Id", "CUIT", "Categoria", "Direccion", "Email", "FechaRegistro", "Nombre", "RazonSocial", "Telefono" },
-                values: new object[] { 1, "12345678901", "Comercio", "Direccion 1", "stockcar@localhost", new DateTime(2024, 2, 24, 19, 18, 8, 549, DateTimeKind.Local).AddTicks(9267), "StockCar", "StockCar SA", "123456789" });
+                values: new object[] { 1, "12345678901", "Comercio", "Direccion 1", "stockcar@localhost", new DateTime(2024, 3, 1, 9, 17, 24, 969, DateTimeKind.Local).AddTicks(5958), "StockCar", "StockCar SA", "123456789" });
+
+            migrationBuilder.InsertData(
+                table: "Feriado",
+                columns: new[] { "Id", "EsNacional", "Fecha", "Motivo" },
+                values: new object[,]
+                {
+                    { 1, true, new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Año Nuevo" },
+                    { 2, false, new DateTime(2021, 2, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "Carnaval" },
+                    { 3, false, new DateTime(2024, 2, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), "Carnaval" },
+                    { 4, true, new DateTime(2024, 3, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), "Día de la Memoria por la Verdad y la Justicia" },
+                    { 5, false, new DateTime(2024, 3, 28, 0, 0, 0, 0, DateTimeKind.Unspecified), "Jueves Santo" },
+                    { 6, false, new DateTime(2024, 3, 29, 0, 0, 0, 0, DateTimeKind.Unspecified), "Viernes Santo" },
+                    { 7, true, new DateTime(2024, 4, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "Día del Veterano y de los Caídos en la Guerra de Malvinas" },
+                    { 8, true, new DateTime(2024, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Día del Trabajador" },
+                    { 9, true, new DateTime(2024, 5, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), "Día de la Revolución de Mayo" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Parametro",
+                columns: new[] { "Id", "Nombre", "Valor" },
+                values: new object[] { 1, "horas mes", "200" });
 
             migrationBuilder.InsertData(
                 table: "Persona",
@@ -309,36 +438,53 @@ namespace sueldo_rrhh.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "CategoriaConvenio",
-                columns: new[] { "Id", "Agrupamiento", "ConvenioId", "Nombre" },
+                columns: new[] { "Id", "Agrupamiento", "ConvenioId", "Nombre", "SueldoBasico" },
                 values: new object[,]
                 {
-                    { 1, 'A', 1, "Maestranza y Servicios" },
-                    { 2, 'B', 1, "Maestranza y Servicios" },
-                    { 3, 'C', 1, "Maestranza y Servicios" },
-                    { 4, 'A', 1, "Administrativo" },
-                    { 5, 'B', 1, "Administrativo" },
-                    { 6, 'C', 1, "Administrativo" },
-                    { 7, 'D', 1, "Administrativo" },
-                    { 8, 'E', 1, "Administrativo" },
-                    { 9, 'F', 1, "Administrativo" },
-                    { 10, 'A', 1, "Cajero" },
-                    { 11, 'B', 1, "Cajero" },
-                    { 12, 'C', 1, "Cajero" },
-                    { 13, 'A', 1, "Auxiliar" },
-                    { 14, 'B', 1, "Auxiliar" },
-                    { 15, 'C', 1, "Auxiliar" },
-                    { 16, 'A', 1, "Auxiliar Especializado" },
-                    { 17, 'B', 1, "Auxiliar Especializado" },
-                    { 18, 'A', 1, "Vendedor" },
-                    { 19, 'B', 1, "Vendedor" },
-                    { 20, 'C', 1, "Vendedor" },
-                    { 21, 'D', 1, "Vendedor" }
+                    { 1, 'A', 1, "Maestranza y Servicios", 441108.34000000003 },
+                    { 2, 'B', 1, "Maestranza y Servicios", 442385.29999999999 },
+                    { 3, 'C', 1, "Maestranza y Servicios", 446859.16999999998 },
+                    { 4, 'A', 1, "Administrativo", 445901.45000000001 },
+                    { 5, 'B', 1, "Administrativo", 447820.26000000001 },
+                    { 6, 'C', 1, "Administrativo", 449736.83000000002 },
+                    { 7, 'D', 1, "Administrativo", 455489.90999999997 },
+                    { 8, 'E', 1, "Administrativo", 460283.01000000001 },
+                    { 9, 'F', 1, "Administrativo", 467314.16999999998 },
+                    { 10, 'A', 1, "Cajero", 447498.77000000002 },
+                    { 11, 'B', 1, "Cajero", 449736.83000000002 },
+                    { 12, 'C', 1, "Cajero", 452613.37 },
+                    { 13, 'A', 1, "Auxiliar", 447498.77000000002 },
+                    { 14, 'B', 1, "Auxiliar", 450694.54999999999 },
+                    { 15, 'C', 1, "Auxiliar", 461241.85999999999 },
+                    { 16, 'A', 1, "Auxiliar Especializado", 451335.28000000003 },
+                    { 17, 'B', 1, "Auxiliar Especializado", 457087.22999999998 },
+                    { 18, 'A', 1, "Vendedor", 447498.77000000002 },
+                    { 19, 'B', 1, "Vendedor", 457088.35999999999 },
+                    { 20, 'C', 1, "Vendedor", 460283.01000000001 },
+                    { 21, 'D', 1, "Vendedor", 467314.16999999998 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Conceptos",
+                columns: new[] { "Id", "ConvenioId", "Fecha", "Nombre", "Remunerativo", "Valor" },
+                values: new object[,]
+                {
+                    { 1, 1, null, "Sueldo básico", true, 450000.0 },
+                    { 2, 1, null, "Adicional por asistencia", true, 0.083299999999999999 },
+                    { 3, 1, null, "Adicional por antiguedad", true, 0.01 },
+                    { 4, 1, null, "Descuento jubilatorio", true, -0.11 },
+                    { 5, 1, null, "Descuento obra social", true, -0.029999999999999999 },
+                    { 6, 1, null, "Descuento sindical", true, -0.02 },
+                    { 7, 1, null, "Descuento Ley 19.032 - INSSJP", true, -0.029999999999999999 },
+                    { 8, 1, new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Incremento No Remunerativo - Acuerdo Febrero 2024", false, 0.20000000000000001 },
+                    { 9, 1, new DateTime(2024, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Incremento No Remunerativo - Acuerdo Febrero 2024", false, 0.17599999999999999 },
+                    { 10, 1, new DateTime(2024, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Incremento No Remunerativo - Acuerdo Febrero 2024", false, 0.17599999999999999 }
                 });
 
             migrationBuilder.InsertData(
                 table: "PersonaHistorial",
                 columns: new[] { "Id", "CBU", "CUIL", "CVU", "Domicilio", "EstadoCivil", "FechaEgreso", "FechaIngreso", "FechaNacimiento", "Genero", "Hijos", "NombreCompleto", "PersonaId", "VigenteDesde", "VigenteHasta" },
-                values: new object[] { 1, null, "20345678901", null, "Direccion 2", 0, null, new DateTime(2024, 2, 24, 19, 18, 8, 549, DateTimeKind.Local).AddTicks(9381), new DateTime(2000, 10, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, 0, "Admin", 1, new DateTime(2024, 2, 24, 19, 18, 8, 549, DateTimeKind.Local).AddTicks(9375), null });
+                values: new object[] { 1, null, "20345678901", null, "Direccion 2", 0, null, new DateTime(2024, 3, 1, 9, 17, 24, 969, DateTimeKind.Local).AddTicks(6092), new DateTime(2000, 10, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, 0, "Admin", 1, new DateTime(2024, 3, 1, 9, 17, 24, 969, DateTimeKind.Local).AddTicks(6083), null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -389,20 +535,46 @@ namespace sueldo_rrhh.Data.Migrations
                 column: "ConvenioId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Conceptos_ConvenioId",
+                table: "Conceptos",
+                column: "ConvenioId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Contrato_CategoriaConvenioId",
                 table: "Contrato",
                 column: "CategoriaConvenioId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Contrato_EmpresaId",
+                table: "Contrato",
+                column: "EmpresaId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Contrato_PersonaId",
                 table: "Contrato",
-                column: "PersonaId");
+                column: "PersonaId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Empresa_CUIT",
                 table: "Empresa",
                 column: "CUIT",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_FeriadoTrabajado_ContratoId",
+                table: "FeriadoTrabajado",
+                column: "ContratoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_FeriadoTrabajado_FeriadoId",
+                table: "FeriadoTrabajado",
+                column: "FeriadoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_HoraExtra_ContratoId",
+                table: "HoraExtra",
+                column: "ContratoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PersonaHistorial_PersonaId",
@@ -429,10 +601,16 @@ namespace sueldo_rrhh.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Contrato");
+                name: "Conceptos");
 
             migrationBuilder.DropTable(
-                name: "Empresa");
+                name: "FeriadoTrabajado");
+
+            migrationBuilder.DropTable(
+                name: "HoraExtra");
+
+            migrationBuilder.DropTable(
+                name: "Parametro");
 
             migrationBuilder.DropTable(
                 name: "PersonaHistorial");
@@ -444,7 +622,16 @@ namespace sueldo_rrhh.Data.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
+                name: "Feriado");
+
+            migrationBuilder.DropTable(
+                name: "Contrato");
+
+            migrationBuilder.DropTable(
                 name: "CategoriaConvenio");
+
+            migrationBuilder.DropTable(
+                name: "Empresa");
 
             migrationBuilder.DropTable(
                 name: "Persona");
