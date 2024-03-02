@@ -650,7 +650,7 @@ namespace sueldo_rrhh.Data.Migrations
                             Categoria = "Comercio",
                             Direccion = "Direccion 1",
                             Email = "stockcar@localhost",
-                            FechaRegistro = new DateTime(2024, 3, 1, 9, 17, 24, 969, DateTimeKind.Local).AddTicks(5958),
+                            FechaRegistro = new DateTime(2024, 3, 2, 0, 52, 33, 307, DateTimeKind.Local).AddTicks(6054),
                             Nombre = "StockCar",
                             RazonSocial = "StockCar SA",
                             Telefono = "123456789"
@@ -759,9 +759,10 @@ namespace sueldo_rrhh.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ContratoId");
-
                     b.HasIndex("FeriadoId");
+
+                    b.HasIndex("ContratoId", "FeriadoId")
+                        .IsUnique();
 
                     b.ToTable("FeriadoTrabajado", (string)null);
                 });
@@ -900,13 +901,13 @@ namespace sueldo_rrhh.Data.Migrations
                             CUIL = "20345678901",
                             Domicilio = "Direccion 2",
                             EstadoCivil = 0,
-                            FechaIngreso = new DateTime(2024, 3, 1, 9, 17, 24, 969, DateTimeKind.Local).AddTicks(6092),
+                            FechaIngreso = new DateTime(2024, 3, 2, 0, 52, 33, 307, DateTimeKind.Local).AddTicks(6213),
                             FechaNacimiento = new DateTime(2000, 10, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Genero = 0,
                             Hijos = 0,
                             NombreCompleto = "Admin",
                             PersonaId = 1,
-                            VigenteDesde = new DateTime(2024, 3, 1, 9, 17, 24, 969, DateTimeKind.Local).AddTicks(6083)
+                            VigenteDesde = new DateTime(2024, 3, 2, 0, 52, 33, 307, DateTimeKind.Local).AddTicks(6205)
                         });
                 });
 

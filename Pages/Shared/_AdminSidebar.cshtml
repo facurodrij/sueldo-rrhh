@@ -3,74 +3,73 @@
 <aside id="sidebar">
     <div class="d-flex">
         <button class="toggle-btn" type="button">
-            <i class="lni lni-grid-alt"></i>
+            <i class="lni lni-menu"></i>
         </button>
         <div class="sidebar-logo">
-            <a href="#">CodzSword</a>
+            <a asp-page="/Index">sueldo_rrhh</a>
         </div>
     </div>
     <ul class="sidebar-nav">
         <li class="sidebar-item">
-            <a href="#" class="sidebar-link">
+            <a asp-page="/Admin/ApplicationUsers/Index" class="sidebar-link">
                 <i class="lni lni-user"></i>
-                <span>Profile</span>
+                <span>Usuarios</span>
             </a>
         </li>
         <li class="sidebar-item">
-            <a href="#" class="sidebar-link">
-                <i class="lni lni-agenda"></i>
-                <span>Task</span>
+            <a asp-page="/Admin/Personas/Index" class="sidebar-link">
+                <i class="lni lni-users"></i>
+                <span>Personas</span>
             </a>
         </li>
+        <li class="sidebar-item">
+            <a asp-page="/Admin/Contratos/Index" class="sidebar-link">
+                <i class="lni lni-pencil-alt"></i>
+                <span>Contratos</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+            <a asp-page="/Admin/HorasExtras/Index" class="sidebar-link">
+                <i class="lni lni-timer"></i>
+                <span>Horas Extras</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+            <a asp-page="/Admin/FeriadosTrabajados/Index" class="sidebar-link">
+                <i class="lni lni-calendar"></i>
+                <span>Feriados Trabajados</span>
+            </a>
+        </li>
+        <!-- TODO: Recibos -->
         <li class="sidebar-item">
             <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
                data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
-                <i class="lni lni-protection"></i>
-                <span>Auth</span>
+                <i class="lni lni-cog"></i>
+                <span>Ajustes</span>
             </a>
             <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">Login</a>
+                    <a asp-page="/Admin/Empresas/Index" class="sidebar-link">Empresas</a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">Register</a>
+                    <a asp-page="/Admin/Conceptos/Index" class="sidebar-link">Conceptos</a>
                 </li>
-            </ul>
-        </li>
-        <li class="sidebar-item">
-            <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
-               data-bs-target="#multi" aria-expanded="false" aria-controls="multi">
-                <i class="lni lni-layout"></i>
-                <span>Multi Level</span>
-            </a>
-            <ul id="multi" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse"
-                       data-bs-target="#multi-two" aria-expanded="false" aria-controls="multi-two">
-                        Two Links
-                    </a>
-                    <ul id="multi-two" class="sidebar-dropdown list-unstyled collapse">
-                        <li class="sidebar-item">
-                            <a href="#" class="sidebar-link">Link 1</a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="#" class="sidebar-link">Link 2</a>
-                        </li>
-                    </ul>
+                    <a asp-page="/Admin/Convenios/Index" class="sidebar-link">Convenios</a>
+                </li>
+                <li class="sidebar-item">
+                    <a asp-page="/Admin/CategoriaConvenios/Index" class="sidebar-link">Categoria de Convenios</a>
+                </li>
+                <li class="sidebar-item">
+                    <a asp-page="/Admin/Feriados/Index" class="sidebar-link">Feriados</a>
+                </li>
+                <li class="sidebar-item">
+                    <a asp-page="/Admin/Parametros/Index" class="sidebar-link">Parametros</a>
+                </li>
+                <li class="sidebar-item">
+                    <a asp-page="/Admin/Roles/Index" class="sidebar-link">Roles</a>
                 </li>
             </ul>
-        </li>
-        <li class="sidebar-item">
-            <a href="#" class="sidebar-link">
-                <i class="lni lni-popup"></i>
-                <span>Notification</span>
-            </a>
-        </li>
-        <li class="sidebar-item">
-            <a href="#" class="sidebar-link">
-                <i class="lni lni-cog"></i>
-                <span>Setting</span>
-            </a>
         </li>
     </ul>
     <div class="sidebar-footer">

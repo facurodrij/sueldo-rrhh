@@ -1,0 +1,45 @@
+@page
+@model sueldo_rrhh.Pages.Admin.FeriadosTrabajados.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>FeriadoTrabajado</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="FeriadoTrabajado.Id" />
+            <div class="form-group">
+                <label asp-for="FeriadoTrabajado.ContratoId" class="control-label"></label>
+                <select asp-for="FeriadoTrabajado.ContratoId" class="form-control" asp-items="ViewBag.ContratoId"></select>
+                <span asp-validation-for="FeriadoTrabajado.ContratoId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FeriadoTrabajado.FeriadoId" class="control-label"></label>
+                <select asp-for="FeriadoTrabajado.FeriadoId" class="form-control" asp-items="ViewBag.FeriadoId"></select>
+                <span asp-validation-for="FeriadoTrabajado.FeriadoId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FeriadoTrabajado.HorasTrabajadas" class="control-label"></label>
+                <input asp-for="FeriadoTrabajado.HorasTrabajadas" class="form-control" />
+                <span asp-validation-for="FeriadoTrabajado.HorasTrabajadas" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

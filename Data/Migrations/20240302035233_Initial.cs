@@ -408,7 +408,7 @@ namespace sueldo_rrhh.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Empresa",
                 columns: new[] { "Id", "CUIT", "Categoria", "Direccion", "Email", "FechaRegistro", "Nombre", "RazonSocial", "Telefono" },
-                values: new object[] { 1, "12345678901", "Comercio", "Direccion 1", "stockcar@localhost", new DateTime(2024, 3, 1, 9, 17, 24, 969, DateTimeKind.Local).AddTicks(5958), "StockCar", "StockCar SA", "123456789" });
+                values: new object[] { 1, "12345678901", "Comercio", "Direccion 1", "stockcar@localhost", new DateTime(2024, 3, 2, 0, 52, 33, 307, DateTimeKind.Local).AddTicks(6054), "StockCar", "StockCar SA", "123456789" });
 
             migrationBuilder.InsertData(
                 table: "Feriado",
@@ -484,7 +484,7 @@ namespace sueldo_rrhh.Data.Migrations
             migrationBuilder.InsertData(
                 table: "PersonaHistorial",
                 columns: new[] { "Id", "CBU", "CUIL", "CVU", "Domicilio", "EstadoCivil", "FechaEgreso", "FechaIngreso", "FechaNacimiento", "Genero", "Hijos", "NombreCompleto", "PersonaId", "VigenteDesde", "VigenteHasta" },
-                values: new object[] { 1, null, "20345678901", null, "Direccion 2", 0, null, new DateTime(2024, 3, 1, 9, 17, 24, 969, DateTimeKind.Local).AddTicks(6092), new DateTime(2000, 10, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, 0, "Admin", 1, new DateTime(2024, 3, 1, 9, 17, 24, 969, DateTimeKind.Local).AddTicks(6083), null });
+                values: new object[] { 1, null, "20345678901", null, "Direccion 2", 0, null, new DateTime(2024, 3, 2, 0, 52, 33, 307, DateTimeKind.Local).AddTicks(6213), new DateTime(2000, 10, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, 0, "Admin", 1, new DateTime(2024, 3, 2, 0, 52, 33, 307, DateTimeKind.Local).AddTicks(6205), null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -562,9 +562,10 @@ namespace sueldo_rrhh.Data.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_FeriadoTrabajado_ContratoId",
+                name: "IX_FeriadoTrabajado_ContratoId_FeriadoId",
                 table: "FeriadoTrabajado",
-                column: "ContratoId");
+                columns: new[] { "ContratoId", "FeriadoId" },
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_FeriadoTrabajado_FeriadoId",
