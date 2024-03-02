@@ -145,7 +145,7 @@ namespace sueldo_rrhh.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Conceptos",
+                name: "Concepto",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
@@ -158,9 +158,9 @@ namespace sueldo_rrhh.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Conceptos", x => x.Id);
+                    table.PrimaryKey("PK_Concepto", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Conceptos_Convenio_ConvenioId",
+                        name: "FK_Concepto_Convenio_ConvenioId",
                         column: x => x.ConvenioId,
                         principalTable: "Convenio",
                         principalColumn: "Id",
@@ -400,6 +400,31 @@ namespace sueldo_rrhh.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Solicitud",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ContratoId = table.Column<int>(type: "INTEGER", nullable: false),
+                    FechaSolicitud = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    FechaInicio = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    FechaFin = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Motivo = table.Column<int>(type: "INTEGER", nullable: false),
+                    Descripcion = table.Column<string>(type: "TEXT", nullable: true),
+                    Estado = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Solicitud", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Solicitud_Contrato_ContratoId",
+                        column: x => x.ContratoId,
+                        principalTable: "Contrato",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "Convenio",
                 columns: new[] { "Id", "Nombre" },
@@ -408,7 +433,7 @@ namespace sueldo_rrhh.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Empresa",
                 columns: new[] { "Id", "CUIT", "Categoria", "Direccion", "Email", "FechaRegistro", "Nombre", "RazonSocial", "Telefono" },
-                values: new object[] { 1, "12345678901", "Comercio", "Direccion 1", "stockcar@localhost", new DateTime(2024, 3, 2, 0, 52, 33, 307, DateTimeKind.Local).AddTicks(6054), "StockCar", "StockCar SA", "123456789" });
+                values: new object[] { 1, "12345678901", "Comercio", "Direccion 1", "stockcar@localhost", new DateTime(2024, 3, 2, 1, 28, 34, 170, DateTimeKind.Local).AddTicks(6196), "StockCar", "StockCar SA", "123456789" });
 
             migrationBuilder.InsertData(
                 table: "Feriado",
@@ -465,7 +490,7 @@ namespace sueldo_rrhh.Data.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Conceptos",
+                table: "Concepto",
                 columns: new[] { "Id", "ConvenioId", "Fecha", "Nombre", "Remunerativo", "Valor" },
                 values: new object[,]
                 {
@@ -484,7 +509,7 @@ namespace sueldo_rrhh.Data.Migrations
             migrationBuilder.InsertData(
                 table: "PersonaHistorial",
                 columns: new[] { "Id", "CBU", "CUIL", "CVU", "Domicilio", "EstadoCivil", "FechaEgreso", "FechaIngreso", "FechaNacimiento", "Genero", "Hijos", "NombreCompleto", "PersonaId", "VigenteDesde", "VigenteHasta" },
-                values: new object[] { 1, null, "20345678901", null, "Direccion 2", 0, null, new DateTime(2024, 3, 2, 0, 52, 33, 307, DateTimeKind.Local).AddTicks(6213), new DateTime(2000, 10, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, 0, "Admin", 1, new DateTime(2024, 3, 2, 0, 52, 33, 307, DateTimeKind.Local).AddTicks(6205), null });
+                values: new object[] { 1, null, "20345678901", null, "Direccion 2", 0, null, new DateTime(2024, 3, 2, 1, 28, 34, 170, DateTimeKind.Local).AddTicks(6322), new DateTime(2000, 10, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, 0, "Admin", 1, new DateTime(2024, 3, 2, 1, 28, 34, 170, DateTimeKind.Local).AddTicks(6315), null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -535,8 +560,8 @@ namespace sueldo_rrhh.Data.Migrations
                 column: "ConvenioId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Conceptos_ConvenioId",
-                table: "Conceptos",
+                name: "IX_Concepto_ConvenioId",
+                table: "Concepto",
                 column: "ConvenioId");
 
             migrationBuilder.CreateIndex(
@@ -581,6 +606,11 @@ namespace sueldo_rrhh.Data.Migrations
                 name: "IX_PersonaHistorial_PersonaId",
                 table: "PersonaHistorial",
                 column: "PersonaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Solicitud_ContratoId",
+                table: "Solicitud",
+                column: "ContratoId");
         }
 
         /// <inheritdoc />
@@ -602,7 +632,7 @@ namespace sueldo_rrhh.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Conceptos");
+                name: "Concepto");
 
             migrationBuilder.DropTable(
                 name: "FeriadoTrabajado");
@@ -615,6 +645,9 @@ namespace sueldo_rrhh.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "PersonaHistorial");
+
+            migrationBuilder.DropTable(
+                name: "Solicitud");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

@@ -11,7 +11,7 @@ using sueldo_rrhh.Data;
 namespace sueldo_rrhh.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240302035233_Initial")]
+    [Migration("20240302042834_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -446,7 +446,7 @@ namespace sueldo_rrhh.Data.Migrations
 
                     b.HasIndex("ConvenioId");
 
-                    b.ToTable("Conceptos");
+                    b.ToTable("Concepto", (string)null);
 
                     b.HasData(
                         new
@@ -653,7 +653,7 @@ namespace sueldo_rrhh.Data.Migrations
                             Categoria = "Comercio",
                             Direccion = "Direccion 1",
                             Email = "stockcar@localhost",
-                            FechaRegistro = new DateTime(2024, 3, 2, 0, 52, 33, 307, DateTimeKind.Local).AddTicks(6054),
+                            FechaRegistro = new DateTime(2024, 3, 2, 1, 28, 34, 170, DateTimeKind.Local).AddTicks(6196),
                             Nombre = "StockCar",
                             RazonSocial = "StockCar SA",
                             Telefono = "123456789"
@@ -904,14 +904,48 @@ namespace sueldo_rrhh.Data.Migrations
                             CUIL = "20345678901",
                             Domicilio = "Direccion 2",
                             EstadoCivil = 0,
-                            FechaIngreso = new DateTime(2024, 3, 2, 0, 52, 33, 307, DateTimeKind.Local).AddTicks(6213),
+                            FechaIngreso = new DateTime(2024, 3, 2, 1, 28, 34, 170, DateTimeKind.Local).AddTicks(6322),
                             FechaNacimiento = new DateTime(2000, 10, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Genero = 0,
                             Hijos = 0,
                             NombreCompleto = "Admin",
                             PersonaId = 1,
-                            VigenteDesde = new DateTime(2024, 3, 2, 0, 52, 33, 307, DateTimeKind.Local).AddTicks(6205)
+                            VigenteDesde = new DateTime(2024, 3, 2, 1, 28, 34, 170, DateTimeKind.Local).AddTicks(6315)
                         });
+                });
+
+            modelBuilder.Entity("sueldo_rrhh.Models.Solicitud", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ContratoId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Descripcion")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Estado")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("FechaFin")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("FechaInicio")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("FechaSolicitud")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Motivo")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ContratoId");
+
+                    b.ToTable("Solicitud", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -1060,6 +1094,17 @@ namespace sueldo_rrhh.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Persona");
+                });
+
+            modelBuilder.Entity("sueldo_rrhh.Models.Solicitud", b =>
+                {
+                    b.HasOne("sueldo_rrhh.Models.Contrato", "Contrato")
+                        .WithMany()
+                        .HasForeignKey("ContratoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Contrato");
                 });
 
             modelBuilder.Entity("sueldo_rrhh.Models.CategoriaConvenio", b =>

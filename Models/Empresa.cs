@@ -1,7 +1,9 @@
 using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
 
 namespace sueldo_rrhh.Models;
 
+[Index(nameof(CUIT), IsUnique = true)]
 public class Empresa
 {
     public int Id { get; set; }

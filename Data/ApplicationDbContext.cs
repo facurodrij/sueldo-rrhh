@@ -22,6 +22,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<FeriadoTrabajado> FeriadosTrabajados { get; set; }
     public DbSet<Parametro> Parametros { get; set; }
     public DbSet<Concepto> Conceptos { get; set; }
+    public DbSet<Solicitud> Solicitudes { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -37,9 +38,9 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         modelBuilder.Entity<HoraExtra>().ToTable("HoraExtra");
         modelBuilder.Entity<FeriadoTrabajado>().ToTable("FeriadoTrabajado");
         modelBuilder.Entity<Parametro>().ToTable("Parametro");
+        modelBuilder.Entity<Concepto>().ToTable("Concepto");
+        modelBuilder.Entity<Solicitud>().ToTable("Solicitud");
 
-
-        modelBuilder.Entity<Empresa>().HasIndex(e => e.CUIT).IsUnique();
         modelBuilder.Entity<Empresa>().HasData(
             new Empresa
             {
