@@ -154,6 +154,7 @@ namespace sueldo_rrhh.Data.Migrations
                     Fecha = table.Column<DateTime>(type: "TEXT", nullable: true),
                     Valor = table.Column<double>(type: "REAL", nullable: false),
                     Remunerativo = table.Column<bool>(type: "INTEGER", nullable: false),
+                    Tipo = table.Column<int>(type: "INTEGER", nullable: true),
                     ConvenioId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
@@ -401,6 +402,28 @@ namespace sueldo_rrhh.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Recibo",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ContratoId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Periodo = table.Column<string>(type: "TEXT", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    AdicionalAsistencia = table.Column<bool>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Recibo", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Recibo_Contrato_ContratoId",
+                        column: x => x.ContratoId,
+                        principalTable: "Contrato",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Solicitud",
                 columns: table => new
                 {
@@ -425,6 +448,28 @@ namespace sueldo_rrhh.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "DetalleRecibo",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ReciboId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Concepto = table.Column<string>(type: "TEXT", nullable: false),
+                    Unidad = table.Column<decimal>(type: "TEXT", nullable: false),
+                    Monto = table.Column<decimal>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DetalleRecibo", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_DetalleRecibo_Recibo_ReciboId",
+                        column: x => x.ReciboId,
+                        principalTable: "Recibo",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "Convenio",
                 columns: new[] { "Id", "Nombre" },
@@ -433,7 +478,7 @@ namespace sueldo_rrhh.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Empresa",
                 columns: new[] { "Id", "CUIT", "Categoria", "Direccion", "Email", "FechaRegistro", "Nombre", "RazonSocial", "Telefono" },
-                values: new object[] { 1, "12345678901", "Comercio", "Direccion 1", "stockcar@localhost", new DateTime(2024, 3, 2, 1, 28, 34, 170, DateTimeKind.Local).AddTicks(6196), "StockCar", "StockCar SA", "123456789" });
+                values: new object[] { 1, "12345678901", "Comercio", "Direccion 1", "stockcar@localhost", new DateTime(2024, 3, 2, 22, 22, 4, 194, DateTimeKind.Local).AddTicks(5923), "StockCar", "StockCar SA", "123456789" });
 
             migrationBuilder.InsertData(
                 table: "Feriado",
@@ -454,7 +499,12 @@ namespace sueldo_rrhh.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Parametro",
                 columns: new[] { "Id", "Nombre", "Valor" },
-                values: new object[] { 1, "horas mes", "200" });
+                values: new object[,]
+                {
+                    { 1, "horas mes", "200" },
+                    { 2, "dias mes", "30" },
+                    { 3, "dias año", "365" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Persona",
@@ -491,25 +541,29 @@ namespace sueldo_rrhh.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "Concepto",
-                columns: new[] { "Id", "ConvenioId", "Fecha", "Nombre", "Remunerativo", "Valor" },
+                columns: new[] { "Id", "ConvenioId", "Fecha", "Nombre", "Remunerativo", "Tipo", "Valor" },
                 values: new object[,]
                 {
-                    { 1, 1, null, "Sueldo básico", true, 450000.0 },
-                    { 2, 1, null, "Adicional por asistencia", true, 0.083299999999999999 },
-                    { 3, 1, null, "Adicional por antiguedad", true, 0.01 },
-                    { 4, 1, null, "Descuento jubilatorio", true, -0.11 },
-                    { 5, 1, null, "Descuento obra social", true, -0.029999999999999999 },
-                    { 6, 1, null, "Descuento sindical", true, -0.02 },
-                    { 7, 1, null, "Descuento Ley 19.032 - INSSJP", true, -0.029999999999999999 },
-                    { 8, 1, new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Incremento No Remunerativo - Acuerdo Febrero 2024", false, 0.20000000000000001 },
-                    { 9, 1, new DateTime(2024, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Incremento No Remunerativo - Acuerdo Febrero 2024", false, 0.17599999999999999 },
-                    { 10, 1, new DateTime(2024, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Incremento No Remunerativo - Acuerdo Febrero 2024", false, 0.17599999999999999 }
+                    { 1, 1, null, "Sueldo básico", true, null, 450000.0 },
+                    { 2, 1, null, "Adicional por asistencia", true, null, 0.083299999999999999 },
+                    { 3, 1, null, "Adicional por antiguedad", true, null, 0.01 },
+                    { 4, 1, null, "Descuento jubilatorio", true, null, -0.11 },
+                    { 5, 1, null, "Descuento obra social", true, null, -0.029999999999999999 },
+                    { 6, 1, null, "Descuento sindical", true, null, -0.02 },
+                    { 7, 1, null, "Descuento Ley 19.032 - INSSJP", true, null, -0.029999999999999999 },
+                    { 8, 1, null, "Descuento FAECyS - Art. 100 CCT 130/75", true, null, -0.0050000000000000001 },
+                    { 9, 1, new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Incremento No Remunerativo - Acuerdo Febrero 2024", false, null, 0.20000000000000001 },
+                    { 10, 1, new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Acuerdo Febrero 2024 Presentismo", false, null, 0.0166 },
+                    { 11, 1, new DateTime(2024, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Incremento No Remunerativo - Acuerdo Febrero 2024", false, null, 0.376 },
+                    { 12, 1, new DateTime(2024, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Acuerdo Febrero 2024 Presentismo", false, null, 0.031300000000000001 },
+                    { 13, 1, new DateTime(2024, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Incremento No Remunerativo - Acuerdo Febrero 2024", false, null, 0.376 },
+                    { 14, 1, new DateTime(2024, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Acuerdo Febrero 2024 Presentismo", false, null, 0.031300000000000001 }
                 });
 
             migrationBuilder.InsertData(
                 table: "PersonaHistorial",
                 columns: new[] { "Id", "CBU", "CUIL", "CVU", "Domicilio", "EstadoCivil", "FechaEgreso", "FechaIngreso", "FechaNacimiento", "Genero", "Hijos", "NombreCompleto", "PersonaId", "VigenteDesde", "VigenteHasta" },
-                values: new object[] { 1, null, "20345678901", null, "Direccion 2", 0, null, new DateTime(2024, 3, 2, 1, 28, 34, 170, DateTimeKind.Local).AddTicks(6322), new DateTime(2000, 10, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, 0, "Admin", 1, new DateTime(2024, 3, 2, 1, 28, 34, 170, DateTimeKind.Local).AddTicks(6315), null });
+                values: new object[] { 1, null, "20345678901", null, "Direccion 2", 0, null, new DateTime(2024, 3, 2, 22, 22, 4, 194, DateTimeKind.Local).AddTicks(6056), new DateTime(2000, 10, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, 0, "Admin", 1, new DateTime(2024, 3, 2, 22, 22, 4, 194, DateTimeKind.Local).AddTicks(6049), null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -581,6 +635,11 @@ namespace sueldo_rrhh.Data.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_DetalleRecibo_ReciboId",
+                table: "DetalleRecibo",
+                column: "ReciboId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Empresa_CUIT",
                 table: "Empresa",
                 column: "CUIT",
@@ -606,6 +665,11 @@ namespace sueldo_rrhh.Data.Migrations
                 name: "IX_PersonaHistorial_PersonaId",
                 table: "PersonaHistorial",
                 column: "PersonaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Recibo_ContratoId",
+                table: "Recibo",
+                column: "ContratoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Solicitud_ContratoId",
@@ -635,6 +699,9 @@ namespace sueldo_rrhh.Data.Migrations
                 name: "Concepto");
 
             migrationBuilder.DropTable(
+                name: "DetalleRecibo");
+
+            migrationBuilder.DropTable(
                 name: "FeriadoTrabajado");
 
             migrationBuilder.DropTable(
@@ -654,6 +721,9 @@ namespace sueldo_rrhh.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Recibo");
 
             migrationBuilder.DropTable(
                 name: "Feriado");

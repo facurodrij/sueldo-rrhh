@@ -23,6 +23,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<Parametro> Parametros { get; set; }
     public DbSet<Concepto> Conceptos { get; set; }
     public DbSet<Solicitud> Solicitudes { get; set; }
+    public DbSet<Recibo> Recibos { get; set; }
+    public DbSet<DetalleRecibo> DetallesRecibo { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -40,6 +42,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         modelBuilder.Entity<Parametro>().ToTable("Parametro");
         modelBuilder.Entity<Concepto>().ToTable("Concepto");
         modelBuilder.Entity<Solicitud>().ToTable("Solicitud");
+        modelBuilder.Entity<Recibo>().ToTable("Recibo");
+        modelBuilder.Entity<DetalleRecibo>().ToTable("DetalleRecibo");
 
         modelBuilder.Entity<Empresa>().HasData(
             new Empresa
@@ -148,37 +152,50 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
             }
         );
 
-        // Seed Parametros
         modelBuilder.Entity<Parametro>().HasData(
-            new Parametro { Id = 1, Nombre = "horas mes", Valor = "200" }
+            new Parametro { Id = 1, Nombre = "horas mes", Valor = "200" },
+            new Parametro { Id = 2, Nombre = "dias mes", Valor = "30" },
+            new Parametro { Id = 3, Nombre = "dias año", Valor = "365" }
         );
 
-        // Seed Acuerdos
         modelBuilder.Entity<Concepto>().HasData(
-            new Concepto
-            {
-                Id = 1, ConvenioId = 1, Nombre = "Sueldo básico", Valor = 450000
-            }, // Sueldo básico por defecto para el CCT
+            new Concepto { Id = 1, ConvenioId = 1, Nombre = "Sueldo básico", Valor = 450000 },
             new Concepto { Id = 2, ConvenioId = 1, Nombre = "Adicional por asistencia", Valor = 0.0833 },
             new Concepto { Id = 3, ConvenioId = 1, Nombre = "Adicional por antiguedad", Valor = 0.01 },
             new Concepto { Id = 4, ConvenioId = 1, Nombre = "Descuento jubilatorio", Valor = -0.11 },
             new Concepto { Id = 5, ConvenioId = 1, Nombre = "Descuento obra social", Valor = -0.03 },
             new Concepto { Id = 6, ConvenioId = 1, Nombre = "Descuento sindical", Valor = -0.02 },
             new Concepto { Id = 7, ConvenioId = 1, Nombre = "Descuento Ley 19.032 - INSSJP", Valor = -0.03 },
+            new Concepto { Id = 8, ConvenioId = 1, Nombre = "Descuento FAECyS - Art. 100 CCT 130/75", Valor = -0.005 },
             new Concepto
             {
-                Id = 8, ConvenioId = 1, Nombre = "Incremento No Remunerativo - Acuerdo Febrero 2024",
+                Id = 9, ConvenioId = 1, Nombre = "Incremento No Remunerativo - Acuerdo Febrero 2024",
                 Fecha = new DateTime(2024, 1, 1), Valor = 0.20, Remunerativo = false
             },
             new Concepto
             {
-                Id = 9, ConvenioId = 1, Nombre = "Incremento No Remunerativo - Acuerdo Febrero 2024",
-                Fecha = new DateTime(2024, 2, 1), Valor = 0.176, Remunerativo = false
+                Id = 10, ConvenioId = 1, Nombre = "Acuerdo Febrero 2024 Presentismo",
+                Fecha = new DateTime(2024, 1, 1), Valor = 0.0166, Remunerativo = false
             },
             new Concepto
             {
-                Id = 10, ConvenioId = 1, Nombre = "Incremento No Remunerativo - Acuerdo Febrero 2024",
-                Fecha = new DateTime(2024, 3, 1), Valor = 0.176, Remunerativo = false
+                Id = 11, ConvenioId = 1, Nombre = "Incremento No Remunerativo - Acuerdo Febrero 2024",
+                Fecha = new DateTime(2024, 2, 1), Valor = 0.376, Remunerativo = false
+            },
+            new Concepto
+            {
+                Id = 12, ConvenioId = 1, Nombre = "Acuerdo Febrero 2024 Presentismo",
+                Fecha = new DateTime(2024, 2, 1), Valor = 0.0313, Remunerativo = false
+            },
+            new Concepto
+            {
+                Id = 13, ConvenioId = 1, Nombre = "Incremento No Remunerativo - Acuerdo Febrero 2024",
+                Fecha = new DateTime(2024, 3, 1), Valor = 0.376, Remunerativo = false
+            },
+            new Concepto
+            {
+                Id = 14, ConvenioId = 1, Nombre = "Acuerdo Febrero 2024 Presentismo",
+                Fecha = new DateTime(2024, 3, 1), Valor = 0.0313, Remunerativo = false
             }
         );
     }

@@ -1,0 +1,43 @@
+@page
+@model sueldo_rrhh.Pages.Admin.Recibos.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Recibo</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Recibo.Contrato)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Recibo.Contrato.Id)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Recibo.Periodo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Recibo.Periodo)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Recibo.AdicionalAsistencia)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Recibo.AdicionalAsistencia)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Recibo.FechaRegistro)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Recibo.FechaRegistro)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Recibo.Id">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

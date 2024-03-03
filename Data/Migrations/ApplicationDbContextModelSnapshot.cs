@@ -436,6 +436,9 @@ namespace sueldo_rrhh.Data.Migrations
                     b.Property<bool>("Remunerativo")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int?>("Tipo")
+                        .HasColumnType("INTEGER");
+
                     b.Property<double>("Valor")
                         .HasColumnType("REAL");
 
@@ -506,6 +509,14 @@ namespace sueldo_rrhh.Data.Migrations
                         {
                             Id = 8,
                             ConvenioId = 1,
+                            Nombre = "Descuento FAECyS - Art. 100 CCT 130/75",
+                            Remunerativo = true,
+                            Valor = -0.0050000000000000001
+                        },
+                        new
+                        {
+                            Id = 9,
+                            ConvenioId = 1,
                             Fecha = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Nombre = "Incremento No Remunerativo - Acuerdo Febrero 2024",
                             Remunerativo = false,
@@ -513,21 +524,48 @@ namespace sueldo_rrhh.Data.Migrations
                         },
                         new
                         {
-                            Id = 9,
+                            Id = 10,
+                            ConvenioId = 1,
+                            Fecha = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nombre = "Acuerdo Febrero 2024 Presentismo",
+                            Remunerativo = false,
+                            Valor = 0.0166
+                        },
+                        new
+                        {
+                            Id = 11,
                             ConvenioId = 1,
                             Fecha = new DateTime(2024, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Nombre = "Incremento No Remunerativo - Acuerdo Febrero 2024",
                             Remunerativo = false,
-                            Valor = 0.17599999999999999
+                            Valor = 0.376
                         },
                         new
                         {
-                            Id = 10,
+                            Id = 12,
+                            ConvenioId = 1,
+                            Fecha = new DateTime(2024, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nombre = "Acuerdo Febrero 2024 Presentismo",
+                            Remunerativo = false,
+                            Valor = 0.031300000000000001
+                        },
+                        new
+                        {
+                            Id = 13,
                             ConvenioId = 1,
                             Fecha = new DateTime(2024, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Nombre = "Incremento No Remunerativo - Acuerdo Febrero 2024",
                             Remunerativo = false,
-                            Valor = 0.17599999999999999
+                            Valor = 0.376
+                        },
+                        new
+                        {
+                            Id = 14,
+                            ConvenioId = 1,
+                            Fecha = new DateTime(2024, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nombre = "Acuerdo Febrero 2024 Presentismo",
+                            Remunerativo = false,
+                            Valor = 0.031300000000000001
                         });
                 });
 
@@ -593,6 +631,32 @@ namespace sueldo_rrhh.Data.Migrations
                         });
                 });
 
+            modelBuilder.Entity("sueldo_rrhh.Models.DetalleRecibo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Concepto")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal>("Monto")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("ReciboId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<decimal>("Unidad")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ReciboId");
+
+                    b.ToTable("DetalleRecibo", (string)null);
+                });
+
             modelBuilder.Entity("sueldo_rrhh.Models.Empresa", b =>
                 {
                     b.Property<int>("Id")
@@ -650,7 +714,7 @@ namespace sueldo_rrhh.Data.Migrations
                             Categoria = "Comercio",
                             Direccion = "Direccion 1",
                             Email = "stockcar@localhost",
-                            FechaRegistro = new DateTime(2024, 3, 2, 1, 28, 34, 170, DateTimeKind.Local).AddTicks(6196),
+                            FechaRegistro = new DateTime(2024, 3, 2, 22, 22, 4, 194, DateTimeKind.Local).AddTicks(5923),
                             Nombre = "StockCar",
                             RazonSocial = "StockCar SA",
                             Telefono = "123456789"
@@ -813,6 +877,18 @@ namespace sueldo_rrhh.Data.Migrations
                             Id = 1,
                             Nombre = "horas mes",
                             Valor = "200"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Nombre = "dias mes",
+                            Valor = "30"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Nombre = "dias año",
+                            Valor = "365"
                         });
                 });
 
@@ -901,14 +977,40 @@ namespace sueldo_rrhh.Data.Migrations
                             CUIL = "20345678901",
                             Domicilio = "Direccion 2",
                             EstadoCivil = 0,
-                            FechaIngreso = new DateTime(2024, 3, 2, 1, 28, 34, 170, DateTimeKind.Local).AddTicks(6322),
+                            FechaIngreso = new DateTime(2024, 3, 2, 22, 22, 4, 194, DateTimeKind.Local).AddTicks(6056),
                             FechaNacimiento = new DateTime(2000, 10, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Genero = 0,
                             Hijos = 0,
                             NombreCompleto = "Admin",
                             PersonaId = 1,
-                            VigenteDesde = new DateTime(2024, 3, 2, 1, 28, 34, 170, DateTimeKind.Local).AddTicks(6315)
+                            VigenteDesde = new DateTime(2024, 3, 2, 22, 22, 4, 194, DateTimeKind.Local).AddTicks(6049)
                         });
+                });
+
+            modelBuilder.Entity("sueldo_rrhh.Models.Recibo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("AdicionalAsistencia")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ContratoId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("FechaRegistro")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Periodo")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ContratoId");
+
+                    b.ToTable("Recibo", (string)null);
                 });
 
             modelBuilder.Entity("sueldo_rrhh.Models.Solicitud", b =>
@@ -1052,6 +1154,17 @@ namespace sueldo_rrhh.Data.Migrations
                     b.Navigation("Persona");
                 });
 
+            modelBuilder.Entity("sueldo_rrhh.Models.DetalleRecibo", b =>
+                {
+                    b.HasOne("sueldo_rrhh.Models.Recibo", "Recibo")
+                        .WithMany()
+                        .HasForeignKey("ReciboId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Recibo");
+                });
+
             modelBuilder.Entity("sueldo_rrhh.Models.FeriadoTrabajado", b =>
                 {
                     b.HasOne("sueldo_rrhh.Models.Contrato", "Contrato")
@@ -1091,6 +1204,17 @@ namespace sueldo_rrhh.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Persona");
+                });
+
+            modelBuilder.Entity("sueldo_rrhh.Models.Recibo", b =>
+                {
+                    b.HasOne("sueldo_rrhh.Models.Contrato", "Contrato")
+                        .WithMany()
+                        .HasForeignKey("ContratoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Contrato");
                 });
 
             modelBuilder.Entity("sueldo_rrhh.Models.Solicitud", b =>
