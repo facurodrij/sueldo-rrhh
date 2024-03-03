@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;
 
-namespace sueldo_rrhh.Pages.Roles;
+namespace sueldo_rrhh.Pages.Admin.Roles;
 
 [Authorize(Roles = "Admin")]
 public class DeleteModel : PageModel

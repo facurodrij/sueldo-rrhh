@@ -8,56 +8,44 @@ using Microsoft.EntityFrameworkCore;
 using sueldo_rrhh.Data;
 using sueldo_rrhh.Models;
 
-namespace sueldo_rrhh.Pages.Admin.Recibos
+namespace sueldo_rrhh.Pages.Admin.Recibos;
+
+public class DeleteModel : PageModel
 {
-    public class DeleteModel : PageModel
+    private readonly ApplicationDbContext _context;
+
+    public DeleteModel(ApplicationDbContext context)
     {
-        private readonly sueldo_rrhh.Data.ApplicationDbContext _context;
+        _context = context;
+    }
 
-        public DeleteModel(sueldo_rrhh.Data.ApplicationDbContext context)
+    [BindProperty] public Recibo Recibo { get; set; } = default!;
+
+    public async Task<IActionResult> OnGetAsync(int? id)
+    {
+        if (id == null) return NotFound();
+
+        var recibo = await _context.Recibos.FirstOrDefaultAsync(m => m.Id == id);
+
+        if (recibo == null)
+            return NotFound();
+        else
+            Recibo = recibo;
+        return Page();
+    }
+
+    public async Task<IActionResult> OnPostAsync(int? id)
+    {
+        if (id == null) return NotFound();
+
+        var recibo = await _context.Recibos.FindAsync(id);
+        if (recibo != null)
         {
-            _context = context;
+            Recibo = recibo;
+            _context.Recibos.Remove(Recibo);
+            await _context.SaveChangesAsync();
         }
 
-        [BindProperty]
-        public Recibo Recibo { get; set; } = default!;
-
-        public async Task<IActionResult> OnGetAsync(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var recibo = await _context.Recibos.FirstOrDefaultAsync(m => m.Id == id);
-
-            if (recibo == null)
-            {
-                return NotFound();
-            }
-            else
-            {
-                Recibo = recibo;
-            }
-            return Page();
-        }
-
-        public async Task<IActionResult> OnPostAsync(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var recibo = await _context.Recibos.FindAsync(id);
-            if (recibo != null)
-            {
-                Recibo = recibo;
-                _context.Recibos.Remove(Recibo);
-                await _context.SaveChangesAsync();
-            }
-
-            return RedirectToPage("./Index");
-        }
+        return RedirectToPage("./Index");
     }
 }

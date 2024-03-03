@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using sueldo_rrhh.Models;
 
-namespace sueldo_rrhh.Pages.ApplicationUsers;
+namespace sueldo_rrhh.Pages.Admin.ApplicationUsers;
 
 public class CreateModel : PageModel
 {

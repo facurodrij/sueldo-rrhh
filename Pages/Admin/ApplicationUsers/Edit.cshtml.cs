@@ -1,13 +1,10 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using sueldo_rrhh.Models;
-using System.Linq;
-using Microsoft.AspNetCore.Identity;
-using System.Threading.Tasks;
 
-
-namespace sueldo_rrhh.Pages.ApplicationUsers;
+namespace sueldo_rrhh.Pages.Admin.ApplicationUsers;
 
 public class EditModel : PageModel
 {

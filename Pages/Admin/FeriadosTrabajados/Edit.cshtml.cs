@@ -9,71 +9,56 @@ using Microsoft.EntityFrameworkCore;
 using sueldo_rrhh.Data;
 using sueldo_rrhh.Models;
 
-namespace sueldo_rrhh.Pages.Admin.FeriadosTrabajados
+namespace sueldo_rrhh.Pages.Admin.FeriadosTrabajados;
+
+public class EditModel : PageModel
 {
-    public class EditModel : PageModel
+    private readonly ApplicationDbContext _context;
+
+    public EditModel(ApplicationDbContext context)
     {
-        private readonly sueldo_rrhh.Data.ApplicationDbContext _context;
+        _context = context;
+    }
 
-        public EditModel(sueldo_rrhh.Data.ApplicationDbContext context)
+    [BindProperty] public FeriadoTrabajado FeriadoTrabajado { get; set; } = default!;
+
+    public async Task<IActionResult> OnGetAsync(int? id)
+    {
+        if (id == null) return NotFound();
+
+        var feriadotrabajado = await _context.FeriadosTrabajados.FirstOrDefaultAsync(m => m.Id == id);
+        if (feriadotrabajado == null) return NotFound();
+        FeriadoTrabajado = feriadotrabajado;
+        ViewData["ContratoId"] = new SelectList(_context.Contratos, "Id", "Id");
+        ViewData["FeriadoId"] = new SelectList(_context.Feriados, "Id", "Id");
+        return Page();
+    }
+
+    // To protect from overposting attacks, enable the specific properties you want to bind to.
+    // For more details, see https://aka.ms/RazorPagesCRUD.
+    public async Task<IActionResult> OnPostAsync()
+    {
+        if (!ModelState.IsValid) return Page();
+
+        _context.Attach(FeriadoTrabajado).State = EntityState.Modified;
+
+        try
         {
-            _context = context;
+            await _context.SaveChangesAsync();
         }
-
-        [BindProperty]
-        public FeriadoTrabajado FeriadoTrabajado { get; set; } = default!;
-
-        public async Task<IActionResult> OnGetAsync(int? id)
+        catch (DbUpdateConcurrencyException)
         {
-            if (id == null)
-            {
+            if (!FeriadoTrabajadoExists(FeriadoTrabajado.Id))
                 return NotFound();
-            }
-
-            var feriadotrabajado =  await _context.FeriadosTrabajados.FirstOrDefaultAsync(m => m.Id == id);
-            if (feriadotrabajado == null)
-            {
-                return NotFound();
-            }
-            FeriadoTrabajado = feriadotrabajado;
-           ViewData["ContratoId"] = new SelectList(_context.Contratos, "Id", "Id");
-           ViewData["FeriadoId"] = new SelectList(_context.Feriados, "Id", "Id");
-            return Page();
+            else
+                throw;
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
-        {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
+        return RedirectToPage("./Index");
+    }
 
-            _context.Attach(FeriadoTrabajado).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!FeriadoTrabajadoExists(FeriadoTrabajado.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return RedirectToPage("./Index");
-        }
-
-        private bool FeriadoTrabajadoExists(int id)
-        {
-            return _context.FeriadosTrabajados.Any(e => e.Id == id);
-        }
+    private bool FeriadoTrabajadoExists(int id)
+    {
+        return _context.FeriadosTrabajados.Any(e => e.Id == id);
     }
 }

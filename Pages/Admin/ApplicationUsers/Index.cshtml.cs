@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using sueldo_rrhh.Models;
 
-namespace sueldo_rrhh.Pages.ApplicationUsers;
+namespace sueldo_rrhh.Pages.Admin.ApplicationUsers;
 
 public class IndexModel : PageModel
 {

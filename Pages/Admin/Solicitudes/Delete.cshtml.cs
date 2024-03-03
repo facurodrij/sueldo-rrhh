@@ -8,56 +8,44 @@ using Microsoft.EntityFrameworkCore;
 using sueldo_rrhh.Data;
 using sueldo_rrhh.Models;
 
-namespace sueldo_rrhh.Pages.Admin.Solicitudes
+namespace sueldo_rrhh.Pages.Admin.Solicitudes;
+
+public class DeleteModel : PageModel
 {
-    public class DeleteModel : PageModel
+    private readonly ApplicationDbContext _context;
+
+    public DeleteModel(ApplicationDbContext context)
     {
-        private readonly sueldo_rrhh.Data.ApplicationDbContext _context;
+        _context = context;
+    }
 
-        public DeleteModel(sueldo_rrhh.Data.ApplicationDbContext context)
+    [BindProperty] public Solicitud Solicitud { get; set; } = default!;
+
+    public async Task<IActionResult> OnGetAsync(int? id)
+    {
+        if (id == null) return NotFound();
+
+        var solicitud = await _context.Solicitudes.FirstOrDefaultAsync(m => m.Id == id);
+
+        if (solicitud == null)
+            return NotFound();
+        else
+            Solicitud = solicitud;
+        return Page();
+    }
+
+    public async Task<IActionResult> OnPostAsync(int? id)
+    {
+        if (id == null) return NotFound();
+
+        var solicitud = await _context.Solicitudes.FindAsync(id);
+        if (solicitud != null)
         {
-            _context = context;
+            Solicitud = solicitud;
+            _context.Solicitudes.Remove(Solicitud);
+            await _context.SaveChangesAsync();
         }
 
-        [BindProperty]
-        public Solicitud Solicitud { get; set; } = default!;
-
-        public async Task<IActionResult> OnGetAsync(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var solicitud = await _context.Solicitudes.FirstOrDefaultAsync(m => m.Id == id);
-
-            if (solicitud == null)
-            {
-                return NotFound();
-            }
-            else
-            {
-                Solicitud = solicitud;
-            }
-            return Page();
-        }
-
-        public async Task<IActionResult> OnPostAsync(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var solicitud = await _context.Solicitudes.FindAsync(id);
-            if (solicitud != null)
-            {
-                Solicitud = solicitud;
-                _context.Solicitudes.Remove(Solicitud);
-                await _context.SaveChangesAsync();
-            }
-
-            return RedirectToPage("./Index");
-        }
+        return RedirectToPage("./Index");
     }
 }

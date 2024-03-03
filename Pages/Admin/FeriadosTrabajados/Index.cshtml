@@ -12,21 +12,22 @@
 </p>
 <table class="table">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.FeriadoTrabajado[0].Contrato)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FeriadoTrabajado[0].Feriado)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FeriadoTrabajado[0].HorasTrabajadas)
-            </th>
-            <th></th>
-        </tr>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FeriadoTrabajado[0].Contrato)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FeriadoTrabajado[0].Feriado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FeriadoTrabajado[0].HorasTrabajadas)
+        </th>
+        <th></th>
+    </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.FeriadoTrabajado) {
+    @foreach (var item in Model.FeriadoTrabajado)
+    {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Contrato.Id)
@@ -43,6 +44,6 @@
                 <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
-}
+    }
     </tbody>
 </table>

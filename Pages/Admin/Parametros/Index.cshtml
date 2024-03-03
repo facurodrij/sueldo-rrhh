@@ -12,18 +12,19 @@
 </p>
 <table class="table">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Parametro[0].Nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Parametro[0].Valor)
-            </th>
-            <th></th>
-        </tr>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Parametro[0].Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Parametro[0].Valor)
+        </th>
+        <th></th>
+    </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Parametro) {
+    @foreach (var item in Model.Parametro)
+    {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Nombre)
@@ -37,6 +38,6 @@
                 <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
-}
+    }
     </tbody>
 </table>

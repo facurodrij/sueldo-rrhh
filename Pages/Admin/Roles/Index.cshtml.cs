@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
-namespace sueldo_rrhh.Pages.Roles;
+namespace sueldo_rrhh.Pages.Admin.Roles;
 
 [Authorize(Roles = "Admin")]
 public class IndexModel : PageModel

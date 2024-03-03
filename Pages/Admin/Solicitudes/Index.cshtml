@@ -12,33 +12,34 @@
 </p>
 <table class="table">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Solicitud[0].Contrato)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Solicitud[0].FechaSolicitud)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Solicitud[0].FechaInicio)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Solicitud[0].FechaFin)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Solicitud[0].Motivo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Solicitud[0].Descripcion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Solicitud[0].Estado)
-            </th>
-            <th></th>
-        </tr>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Solicitud[0].Contrato)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Solicitud[0].FechaSolicitud)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Solicitud[0].FechaInicio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Solicitud[0].FechaFin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Solicitud[0].Motivo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Solicitud[0].Descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Solicitud[0].Estado)
+        </th>
+        <th></th>
+    </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Solicitud) {
+    @foreach (var item in Model.Solicitud)
+    {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Contrato.Id)
@@ -67,6 +68,6 @@
                 <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
-}
+    }
     </tbody>
 </table>

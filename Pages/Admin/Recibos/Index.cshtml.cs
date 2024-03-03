@@ -8,23 +8,22 @@ using Microsoft.EntityFrameworkCore;
 using sueldo_rrhh.Data;
 using sueldo_rrhh.Models;
 
-namespace sueldo_rrhh.Pages.Admin.Recibos
+namespace sueldo_rrhh.Pages.Admin.Recibos;
+
+public class IndexModel : PageModel
 {
-    public class IndexModel : PageModel
+    private readonly ApplicationDbContext _context;
+
+    public IndexModel(ApplicationDbContext context)
     {
-        private readonly sueldo_rrhh.Data.ApplicationDbContext _context;
+        _context = context;
+    }
 
-        public IndexModel(sueldo_rrhh.Data.ApplicationDbContext context)
-        {
-            _context = context;
-        }
+    public IList<Recibo> Recibo { get; set; } = default!;
 
-        public IList<Recibo> Recibo { get;set; } = default!;
-
-        public async Task OnGetAsync()
-        {
-            Recibo = await _context.Recibos
-                .Include(r => r.Contrato).ToListAsync();
-        }
+    public async Task OnGetAsync()
+    {
+        Recibo = await _context.Recibos
+            .Include(r => r.Contrato).ToListAsync();
     }
 }

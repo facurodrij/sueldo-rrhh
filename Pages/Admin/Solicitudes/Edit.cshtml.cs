@@ -9,70 +9,55 @@ using Microsoft.EntityFrameworkCore;
 using sueldo_rrhh.Data;
 using sueldo_rrhh.Models;
 
-namespace sueldo_rrhh.Pages.Admin.Solicitudes
+namespace sueldo_rrhh.Pages.Admin.Solicitudes;
+
+public class EditModel : PageModel
 {
-    public class EditModel : PageModel
+    private readonly ApplicationDbContext _context;
+
+    public EditModel(ApplicationDbContext context)
     {
-        private readonly sueldo_rrhh.Data.ApplicationDbContext _context;
+        _context = context;
+    }
 
-        public EditModel(sueldo_rrhh.Data.ApplicationDbContext context)
+    [BindProperty] public Solicitud Solicitud { get; set; } = default!;
+
+    public async Task<IActionResult> OnGetAsync(int? id)
+    {
+        if (id == null) return NotFound();
+
+        var solicitud = await _context.Solicitudes.FirstOrDefaultAsync(m => m.Id == id);
+        if (solicitud == null) return NotFound();
+        Solicitud = solicitud;
+        ViewData["ContratoId"] = new SelectList(_context.Contratos, "Id", "Id");
+        return Page();
+    }
+
+    // To protect from overposting attacks, enable the specific properties you want to bind to.
+    // For more details, see https://aka.ms/RazorPagesCRUD.
+    public async Task<IActionResult> OnPostAsync()
+    {
+        if (!ModelState.IsValid) return Page();
+
+        _context.Attach(Solicitud).State = EntityState.Modified;
+
+        try
         {
-            _context = context;
+            await _context.SaveChangesAsync();
         }
-
-        [BindProperty]
-        public Solicitud Solicitud { get; set; } = default!;
-
-        public async Task<IActionResult> OnGetAsync(int? id)
+        catch (DbUpdateConcurrencyException)
         {
-            if (id == null)
-            {
+            if (!SolicitudExists(Solicitud.Id))
                 return NotFound();
-            }
-
-            var solicitud =  await _context.Solicitudes.FirstOrDefaultAsync(m => m.Id == id);
-            if (solicitud == null)
-            {
-                return NotFound();
-            }
-            Solicitud = solicitud;
-           ViewData["ContratoId"] = new SelectList(_context.Contratos, "Id", "Id");
-            return Page();
+            else
+                throw;
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
-        {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
+        return RedirectToPage("./Index");
+    }
 
-            _context.Attach(Solicitud).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!SolicitudExists(Solicitud.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return RedirectToPage("./Index");
-        }
-
-        private bool SolicitudExists(int id)
-        {
-            return _context.Solicitudes.Any(e => e.Id == id);
-        }
+    private bool SolicitudExists(int id)
+    {
+        return _context.Solicitudes.Any(e => e.Id == id);
     }
 }

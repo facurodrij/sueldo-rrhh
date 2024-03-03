@@ -8,24 +8,23 @@ using Microsoft.EntityFrameworkCore;
 using sueldo_rrhh.Data;
 using sueldo_rrhh.Models;
 
-namespace sueldo_rrhh.Pages.Admin.FeriadosTrabajados
+namespace sueldo_rrhh.Pages.Admin.FeriadosTrabajados;
+
+public class IndexModel : PageModel
 {
-    public class IndexModel : PageModel
+    private readonly ApplicationDbContext _context;
+
+    public IndexModel(ApplicationDbContext context)
     {
-        private readonly sueldo_rrhh.Data.ApplicationDbContext _context;
+        _context = context;
+    }
 
-        public IndexModel(sueldo_rrhh.Data.ApplicationDbContext context)
-        {
-            _context = context;
-        }
+    public IList<FeriadoTrabajado> FeriadoTrabajado { get; set; } = default!;
 
-        public IList<FeriadoTrabajado> FeriadoTrabajado { get;set; } = default!;
-
-        public async Task OnGetAsync()
-        {
-            FeriadoTrabajado = await _context.FeriadosTrabajados
-                .Include(f => f.Contrato)
-                .Include(f => f.Feriado).ToListAsync();
-        }
+    public async Task OnGetAsync()
+    {
+        FeriadoTrabajado = await _context.FeriadosTrabajados
+            .Include(f => f.Contrato)
+            .Include(f => f.Feriado).ToListAsync();
     }
 }
