@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using sueldo_rrhh.Models;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using sueldo_rrhh.Data;
 

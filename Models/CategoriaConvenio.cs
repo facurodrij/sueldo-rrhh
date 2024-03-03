@@ -1,9 +1,4 @@
 using System.ComponentModel.DataAnnotations;
-using System.Configuration;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
-using sueldo_rrhh.Data;
-using ConfigurationManager = System.Configuration.ConfigurationManager;
 
 namespace sueldo_rrhh.Models;
 

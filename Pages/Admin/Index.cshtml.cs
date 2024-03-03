@@ -1,9 +1,7 @@
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace sueldo_rrhh.Pages.Admin;
 
-[Authorize(Roles = "Admin")]
 public class IndexModel : PageModel
 {
     private readonly ILogger<IndexModel> _logger;

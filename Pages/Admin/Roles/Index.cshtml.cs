@@ -1,11 +1,9 @@
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
 namespace sueldo_rrhh.Pages.Admin.Roles;
 
-[Authorize(Roles = "Admin")]
 public class IndexModel : PageModel
 {
     private readonly RoleManager<IdentityRole> _roleManager;

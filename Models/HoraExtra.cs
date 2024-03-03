@@ -1,5 +1,4 @@
 using System.ComponentModel.DataAnnotations;
-using Microsoft.EntityFrameworkCore;
 using sueldo_rrhh.Data;
 
 namespace sueldo_rrhh.Models;
