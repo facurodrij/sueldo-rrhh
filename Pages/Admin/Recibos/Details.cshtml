@@ -24,6 +24,12 @@
             @Html.DisplayFor(model => model.Recibo.Periodo)
         </dd>
         <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Recibo.Contrato.HorasSemanales)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Recibo.Contrato.HorasSemanales)
+        </dd>
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Recibo.AdicionalAsistencia)
         </dt>
         <dd class="col-sm-10">
@@ -38,6 +44,34 @@
     </dl>
 </div>
 <div>
-    <a asp-page="./Edit" asp-route-id="@Model.Recibo.Id">Edit</a> |
+    <h4>Detalles del Recibo</h4>
+    <hr>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Concepto</th>
+            <th>Base</th>
+            <th>Unidad</th>
+            <th>Monto</th>
+            <th>Tipo</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var detalle in Model.Recibo.Detalles)
+        {
+            var concepto = Model.Conceptos.FirstOrDefault(c => c.Nombre == detalle.Concepto);
+            <tr>
+                <td>@detalle.Concepto</td>
+                <td>@detalle.Base</td>
+                <td>@detalle.Unidad</td>
+                <td>@detalle.Monto</td>
+                <td>@(concepto != null && concepto.Remunerativo ? "Remunerativo" : "No Remunerativo")</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+
+<div>
     <a asp-page="./Index">Back to List</a>
 </div>

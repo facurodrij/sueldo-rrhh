@@ -9,6 +9,8 @@ public class DetalleRecibo
 
     public string Concepto { get; set; }
 
+    public decimal Base { get; set; } // Es el valor base del concepto, por ejemplo, el sueldo basico o bruto
+
     public decimal Unidad { get; set; } // Es el valor del concepto
 
     public decimal Monto { get; set; } // Es el valor del concepto * el sueldo basico

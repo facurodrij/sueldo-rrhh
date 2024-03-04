@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using sueldo_rrhh.Data;
 
 namespace sueldo_rrhh.Models;
 
@@ -43,6 +44,13 @@ public class Contrato
         return FechaFin == null || FechaFin > DateTime.Now;
     }
 
+    public decimal SueldoBasico()
+    {
+       var sueldoBasico = CategoriaConvenio?.SueldoBasico ?? 0;
+       // Dividir la jornada completa por la jornada laboral
+        return sueldoBasico / (int)HorasSemanales.Completa * (int)HorasSemanales;
+    }
+
     public override string? ToString()
     {
         return $"{Persona?.PersonaHistorials.Last().NombreCompleto} - {CategoriaConvenio?.Nombre}";
@@ -51,6 +59,7 @@ public class Contrato
 
 public enum HorasSemanales
 {
-    [Display(Name = "Jornada Parcial (32 hs)")] Parcial = 32,
-    [Display(Name = "Jornada Completa (48 hs)")] Completa = 48
+    [Display(Name = "Jornada Completa (48 hs)")] Completa = 48,
+    [Display(Name = "Media Jornada (24 hs)")] Media = 24,
+    [Display(Name = "Tres Cuartos (36 hs)")] TresCuartos = 36,
 }

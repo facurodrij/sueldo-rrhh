@@ -15,9 +15,11 @@ public class Concepto
     public DateTime? Fecha { get; set; } // Si es nulo, es un concepto fijo
 
     [Display(Name = "Valor del Concepto")]
-    public double Valor { get; set; } // Positivo para haberes, negativo para descuentos
+    public decimal Valor { get; set; } // Positivo para haberes, negativo para descuentos
 
     [Display(Name = "Es Remunerativo")] public bool Remunerativo { get; set; } = true;
+    // Para las DEDUCCIONES, si es true, se resta unicamente a las sumas remunerativas
+    // Si es false, se resta a las sumas remunerativas y no remunerativas (sueldo bruto)
 
     [Display(Name = "Tipo de Concepto")] public TipoConcepto? Tipo { get; set; }
 
@@ -33,5 +35,7 @@ public class Concepto
 public enum TipoConcepto
 {
     [Display(Name = "Por Asistencia")] Asistencia,
-    [Display(Name = "Por Antigüedad")] Antiguedad
+    [Display(Name = "Por Antigüedad")] Antiguedad,
+    [Display(Name = "Por Horas Extras")] HorasExtras,
+    [Display(Name = "Por Feriados Trabajados")] FeriadosTrabajados,
 }

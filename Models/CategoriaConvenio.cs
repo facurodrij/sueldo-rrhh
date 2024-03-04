@@ -18,7 +18,7 @@ public class CategoriaConvenio
     [Display(Name = "Suelo Básico")]
     [DisplayFormat(DataFormatString = "{0:C}")]
     [Required]
-    public double SueldoBasico { get; set; }
+    public decimal SueldoBasico { get; set; }
 
     public int ConvenioId { get; set; }
     public Convenio? Convenio { get; set; }

@@ -77,56 +77,56 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         modelBuilder.Entity<CategoriaConvenio>().HasData(
             new CategoriaConvenio
             {
-                Id = 1, Nombre = "Maestranza y Servicios", Agrupamiento = 'A', ConvenioId = 1, SueldoBasico = 441108.34
+                Id = 1, Nombre = "Maestranza y Servicios", Agrupamiento = 'A', ConvenioId = 1, SueldoBasico = 441108.34m
             },
             new CategoriaConvenio
             {
-                Id = 2, Nombre = "Maestranza y Servicios", Agrupamiento = 'B', ConvenioId = 1, SueldoBasico = 442385.30
+                Id = 2, Nombre = "Maestranza y Servicios", Agrupamiento = 'B', ConvenioId = 1, SueldoBasico = 442385.30m
             },
             new CategoriaConvenio
             {
-                Id = 3, Nombre = "Maestranza y Servicios", Agrupamiento = 'C', ConvenioId = 1, SueldoBasico = 446859.17
+                Id = 3, Nombre = "Maestranza y Servicios", Agrupamiento = 'C', ConvenioId = 1, SueldoBasico = 446859.17m
             },
             new CategoriaConvenio
-                { Id = 4, Nombre = "Administrativo", Agrupamiento = 'A', ConvenioId = 1, SueldoBasico = 445901.45 },
+                { Id = 4, Nombre = "Administrativo", Agrupamiento = 'A', ConvenioId = 1, SueldoBasico = 445901.45m },
             new CategoriaConvenio
-                { Id = 5, Nombre = "Administrativo", Agrupamiento = 'B', ConvenioId = 1, SueldoBasico = 447820.26 },
+                { Id = 5, Nombre = "Administrativo", Agrupamiento = 'B', ConvenioId = 1, SueldoBasico = 447820.26m },
             new CategoriaConvenio
-                { Id = 6, Nombre = "Administrativo", Agrupamiento = 'C', ConvenioId = 1, SueldoBasico = 449736.83 },
+                { Id = 6, Nombre = "Administrativo", Agrupamiento = 'C', ConvenioId = 1, SueldoBasico = 449736.83m },
             new CategoriaConvenio
-                { Id = 7, Nombre = "Administrativo", Agrupamiento = 'D', ConvenioId = 1, SueldoBasico = 455489.91 },
+                { Id = 7, Nombre = "Administrativo", Agrupamiento = 'D', ConvenioId = 1, SueldoBasico = 455489.91m },
             new CategoriaConvenio
-                { Id = 8, Nombre = "Administrativo", Agrupamiento = 'E', ConvenioId = 1, SueldoBasico = 460283.01 },
+                { Id = 8, Nombre = "Administrativo", Agrupamiento = 'E', ConvenioId = 1, SueldoBasico = 460283.01m },
             new CategoriaConvenio
-                { Id = 9, Nombre = "Administrativo", Agrupamiento = 'F', ConvenioId = 1, SueldoBasico = 467314.17 },
+                { Id = 9, Nombre = "Administrativo", Agrupamiento = 'F', ConvenioId = 1, SueldoBasico = 467314.17m },
             new CategoriaConvenio
-                { Id = 10, Nombre = "Cajero", Agrupamiento = 'A', ConvenioId = 1, SueldoBasico = 447498.77 },
+                { Id = 10, Nombre = "Cajero", Agrupamiento = 'A', ConvenioId = 1, SueldoBasico = 447498.77m },
             new CategoriaConvenio
-                { Id = 11, Nombre = "Cajero", Agrupamiento = 'B', ConvenioId = 1, SueldoBasico = 449736.83 },
+                { Id = 11, Nombre = "Cajero", Agrupamiento = 'B', ConvenioId = 1, SueldoBasico = 449736.83m },
             new CategoriaConvenio
-                { Id = 12, Nombre = "Cajero", Agrupamiento = 'C', ConvenioId = 1, SueldoBasico = 452613.37 },
+                { Id = 12, Nombre = "Cajero", Agrupamiento = 'C', ConvenioId = 1, SueldoBasico = 452613.37m },
             new CategoriaConvenio
-                { Id = 13, Nombre = "Auxiliar", Agrupamiento = 'A', ConvenioId = 1, SueldoBasico = 447498.77 },
+                { Id = 13, Nombre = "Auxiliar", Agrupamiento = 'A', ConvenioId = 1, SueldoBasico = 447498.77m },
             new CategoriaConvenio
-                { Id = 14, Nombre = "Auxiliar", Agrupamiento = 'B', ConvenioId = 1, SueldoBasico = 450694.55 },
+                { Id = 14, Nombre = "Auxiliar", Agrupamiento = 'B', ConvenioId = 1, SueldoBasico = 450694.55m },
             new CategoriaConvenio
-                { Id = 15, Nombre = "Auxiliar", Agrupamiento = 'C', ConvenioId = 1, SueldoBasico = 461241.86 },
+                { Id = 15, Nombre = "Auxiliar", Agrupamiento = 'C', ConvenioId = 1, SueldoBasico = 461241.86m },
             new CategoriaConvenio
             {
-                Id = 16, Nombre = "Auxiliar Especializado", Agrupamiento = 'A', ConvenioId = 1, SueldoBasico = 451335.28
+                Id = 16, Nombre = "Auxiliar Especializado", Agrupamiento = 'A', ConvenioId = 1, SueldoBasico = 451335.28m
             },
             new CategoriaConvenio
             {
-                Id = 17, Nombre = "Auxiliar Especializado", Agrupamiento = 'B', ConvenioId = 1, SueldoBasico = 457087.23
+                Id = 17, Nombre = "Auxiliar Especializado", Agrupamiento = 'B', ConvenioId = 1, SueldoBasico = 457087.23m
             },
             new CategoriaConvenio
-                { Id = 18, Nombre = "Vendedor", Agrupamiento = 'A', ConvenioId = 1, SueldoBasico = 447498.77 },
+                { Id = 18, Nombre = "Vendedor", Agrupamiento = 'A', ConvenioId = 1, SueldoBasico = 447498.77m },
             new CategoriaConvenio
-                { Id = 19, Nombre = "Vendedor", Agrupamiento = 'B', ConvenioId = 1, SueldoBasico = 457088.36 },
+                { Id = 19, Nombre = "Vendedor", Agrupamiento = 'B', ConvenioId = 1, SueldoBasico = 457088.36m },
             new CategoriaConvenio
-                { Id = 20, Nombre = "Vendedor", Agrupamiento = 'C', ConvenioId = 1, SueldoBasico = 460283.01 },
+                { Id = 20, Nombre = "Vendedor", Agrupamiento = 'C', ConvenioId = 1, SueldoBasico = 460283.01m },
             new CategoriaConvenio
-                { Id = 21, Nombre = "Vendedor", Agrupamiento = 'D', ConvenioId = 1, SueldoBasico = 467314.17 }
+                { Id = 21, Nombre = "Vendedor", Agrupamiento = 'D', ConvenioId = 1, SueldoBasico = 467314.17m }
         );
 
         modelBuilder.Entity<Feriado>().HasData(
@@ -159,43 +159,64 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         );
 
         modelBuilder.Entity<Concepto>().HasData(
-            new Concepto { Id = 1, ConvenioId = 1, Nombre = "Sueldo básico", Valor = 450000 },
-            new Concepto { Id = 2, ConvenioId = 1, Nombre = "Adicional por asistencia", Valor = 0.0833 },
-            new Concepto { Id = 3, ConvenioId = 1, Nombre = "Adicional por antiguedad", Valor = 0.01 },
-            new Concepto { Id = 4, ConvenioId = 1, Nombre = "Descuento jubilatorio", Valor = -0.11 },
-            new Concepto { Id = 5, ConvenioId = 1, Nombre = "Descuento obra social", Valor = -0.03 },
-            new Concepto { Id = 6, ConvenioId = 1, Nombre = "Descuento sindical", Valor = -0.02 },
-            new Concepto { Id = 7, ConvenioId = 1, Nombre = "Descuento Ley 19.032 - INSSJP", Valor = -0.03 },
-            new Concepto { Id = 8, ConvenioId = 1, Nombre = "Descuento FAECyS - Art. 100 CCT 130/75", Valor = -0.005 },
+            new Concepto { Id = 1, ConvenioId = 1, Nombre = "Sueldo básico", Valor = 450000, Remunerativo = true},
             new Concepto
             {
-                Id = 9, ConvenioId = 1, Nombre = "Incremento No Remunerativo - Acuerdo Febrero 2024",
-                Fecha = new DateTime(2024, 1, 1), Valor = 0.20, Remunerativo = false
+                Id = 2, ConvenioId = 1, Nombre = "Adicional por antiguedad", Valor = 0.01m,
+                Tipo = TipoConcepto.Antiguedad, Remunerativo = true
             },
             new Concepto
             {
-                Id = 10, ConvenioId = 1, Nombre = "Acuerdo Febrero 2024 Presentismo",
-                Fecha = new DateTime(2024, 1, 1), Valor = 0.0166, Remunerativo = false
+                Id = 3, ConvenioId = 1, Nombre = "Adicional por asistencia", Valor = 0.08333m,
+                Tipo = TipoConcepto.Asistencia, Remunerativo = true
             },
+            new Concepto
+            {
+                Id = 4, ConvenioId = 1, Nombre = "Horas extras al 50%", Valor = 1.5m,
+                Tipo = TipoConcepto.HorasExtras, Remunerativo = true
+            },
+            new Concepto
+            {
+                Id = 5, ConvenioId = 1, Nombre = "Horas extras al 100%", Valor = 2.0m,
+                Tipo = TipoConcepto.HorasExtras, Remunerativo = true
+            },
+            new Concepto { Id = 6, ConvenioId = 1, Nombre = "Descuento jubilatorio", Valor = -0.11m, Remunerativo = true },
+            new Concepto { Id = 7, ConvenioId = 1, Nombre = "Descuento Ley 19.032 - INSSJP", Valor = -0.03m, Remunerativo = true },
+            new Concepto { Id = 8, ConvenioId = 1, Nombre = "Descuento obra social", Valor = -0.03m, Remunerativo = false },
+            new Concepto { Id = 9, ConvenioId = 1, Nombre = "Descuento sindical", Valor = -0.02m, Remunerativo = false },
+            new Concepto { Id = 10, ConvenioId = 1, Nombre = "Descuento FAECyS - Art. 100 CCT 130/75", Valor = -0.005m, Remunerativo = false },
             new Concepto
             {
                 Id = 11, ConvenioId = 1, Nombre = "Incremento No Remunerativo - Acuerdo Febrero 2024",
-                Fecha = new DateTime(2024, 2, 1), Valor = 0.376, Remunerativo = false
+                Fecha = new DateTime(2024, 1, 1), Valor = 0.20m, Remunerativo = false
             },
             new Concepto
             {
                 Id = 12, ConvenioId = 1, Nombre = "Acuerdo Febrero 2024 Presentismo",
-                Fecha = new DateTime(2024, 2, 1), Valor = 0.0313, Remunerativo = false
+                Fecha = new DateTime(2024, 1, 1), Valor = 0.0166m, Remunerativo = false,
+                Tipo = TipoConcepto.Asistencia
             },
             new Concepto
             {
                 Id = 13, ConvenioId = 1, Nombre = "Incremento No Remunerativo - Acuerdo Febrero 2024",
-                Fecha = new DateTime(2024, 3, 1), Valor = 0.376, Remunerativo = false
+                Fecha = new DateTime(2024, 2, 1), Valor = 0.376m, Remunerativo = false
             },
             new Concepto
             {
                 Id = 14, ConvenioId = 1, Nombre = "Acuerdo Febrero 2024 Presentismo",
-                Fecha = new DateTime(2024, 3, 1), Valor = 0.0313, Remunerativo = false
+                Fecha = new DateTime(2024, 2, 1), Valor = 0.03133m, Remunerativo = false,
+                Tipo = TipoConcepto.Asistencia
+            },
+            new Concepto
+            {
+                Id = 15, ConvenioId = 1, Nombre = "Incremento No Remunerativo - Acuerdo Febrero 2024",
+                Fecha = new DateTime(2024, 3, 1), Valor = 0.376m, Remunerativo = false
+            },
+            new Concepto
+            {
+                Id = 16, ConvenioId = 1, Nombre = "Acuerdo Febrero 2024 Presentismo",
+                Fecha = new DateTime(2024, 3, 1), Valor = 0.03133m, Remunerativo = false,
+                Tipo = TipoConcepto.Asistencia
             }
         );
     }

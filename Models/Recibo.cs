@@ -20,4 +20,6 @@ public class Recibo
 
     [Display(Name = "Adicional por Asistencia")]
     public bool AdicionalAsistencia { get; set; }
+
+    public ICollection<DetalleRecibo> Detalles { get; set; } = new List<DetalleRecibo>();
 }
