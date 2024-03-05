@@ -1,0 +1,210 @@
+@page
+@using System.Globalization
+@model sueldo_rrhh.Pages.Admin.Recibos.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Recibo</h4>
+    <hr/>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Recibo.Contrato)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Recibo.Contrato.Id)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Recibo.Periodo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Recibo.Periodo)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Recibo.Contrato.HorasSemanales)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Recibo.Contrato.HorasSemanales)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Recibo.AdicionalAsistencia)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Recibo.AdicionalAsistencia)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Recibo.FechaRegistro)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Recibo.FechaRegistro)
+        </dd>
+    </dl>
+</div>
+
+<div class="container border bg-light" id="recibo">
+    <div class="row">
+        <span class="text-end">RECIBO DE HABERES Ley no 20.744<br/>ORIGINAL</span>
+    </div>
+    <div class="row">
+        <span class="text-start">  Fecha de Emisión: @Html.DisplayFor(model => model.Recibo.FechaRegistro)</span>
+        <span class="text-start">  Razón Social: @Html.DisplayFor(model => model.Empresa.RazonSocial)</span>
+        <span class="text-start">  Dirección: @Html.DisplayFor(model => model.Empresa.Direccion)</span>
+        <span class="text-start">  CUIT N°: @Html.DisplayFor(model => model.Empresa.CUIT)</span>
+    </div>
+    <div class="row">
+        <table class="table mb-0">
+            <thead class="bg-dark bg-opacity-25 border-dark border-1">
+            <tr>
+                <th class="text-center border-dark border-1">Apellido y Nombre</th>
+                <th class="text-center border-dark border-1">Legajo</th>
+                <th class="text-center border-dark border-1">C.U.I.L.</th>
+                <th class="text-center border-dark border-1">Fecha de Ingreso</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td class="text-center border-dark border-1">@Html.DisplayFor(model => model.Recibo.Contrato.Persona.PersonaHistorials.Last().NombreCompleto)</td>
+                <td class="text-center border-dark border-1">@Html.DisplayFor(model => model.Recibo.Contrato.Id)</td>
+                <td class="text-center border-dark border-1">@Html.DisplayFor(model => model.Recibo.Contrato.Persona.PersonaHistorials.Last().CUIL)</td>
+                <td class="text-center border-dark border-1">@Html.DisplayFor(model => model.Recibo.Contrato.FechaInicio)</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <table class="table">
+            <thead class="bg-dark bg-opacity-25 border-dark border-1">
+            <tr>
+                <th class="text-center border-dark border-1">Convenio</th>
+                <th class="text-center border-dark border-1">Categoria</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td class="text-center border-dark border-1">@Html.DisplayFor(model => model.Recibo.Contrato.CategoriaConvenio.Convenio.Nombre)</td>
+                <td class="text-center border-dark border-1">@Html.DisplayFor(model => model.Recibo.Contrato.CategoriaConvenio.ToDisplay)</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <h5>  Haberes</h5>
+    <div class="row">
+        <table class="table p-3">
+            <thead class="bg-dark bg-opacity-25 border-dark border-1">
+            <tr>
+                <th class="text-center border-dark border-1">Concepto</th>
+                <th class="text-center border-dark border-1">Base</th>
+                <th class="text-center border-dark border-1">Unidad</th>
+                <th class="text-center border-dark border-1">Remunerativos</th>
+                <th class="text-center border-dark border-1">No Remunerativos</th>
+            </tr>
+            </thead>
+            <tbody>
+            @{
+                var detallesRemunerativos = Model.Recibo.Detalles.Where(d => d.Monto > 0 && Model.Conceptos.FirstOrDefault(c => c.Nombre == d.Concepto)?.Remunerativo == true);
+                var detallesNoRemunerativos = Model.Recibo.Detalles.Where(d => d.Monto > 0 && Model.Conceptos.FirstOrDefault(c => c.Nombre == d.Concepto)?.Remunerativo == false);
+                var totalBruto = detallesRemunerativos.Sum(d => d.Monto) + detallesNoRemunerativos.Sum(d => d.Monto);
+            }
+
+            @foreach (var detalle in detallesRemunerativos)
+            {
+                var concepto = Model.Conceptos.FirstOrDefault(c => c.Nombre == detalle.Concepto);
+                <tr>
+                    <td class="text-start border-dark border-1">@detalle.Concepto</td>
+                    <td class="text-end border-dark border-1">@detalle.Base.ToString("N2", new CultureInfo("es-ES"))</td>
+                    <td class="text-end border-dark border-1">@detalle.Unidad.ToString("N2", new CultureInfo("es-ES"))</td>
+                    <td class="text-end border-dark border-1">@detalle.Monto.ToString("N2", new CultureInfo("es-ES"))</td>
+                    <td class="text-end border-dark border-1"></td>
+                </tr>
+            }
+
+            @foreach (var detalle in detallesNoRemunerativos)
+            {
+                var concepto = Model.Conceptos.FirstOrDefault(c => c.Nombre == detalle.Concepto);
+                <tr>
+                    <td class="text-start border-dark border-1">@detalle.Concepto</td>
+                    <td class="text-end border-dark border-1">@detalle.Base.ToString("N2", new CultureInfo("es-ES"))</td>
+                    <td class="text-end border-dark border-1">@detalle.Unidad.ToString("N2", new CultureInfo("es-ES"))</td>
+                    <td class="text-end border-dark border-1"></td>
+                    <td class="text-end border-dark border-1">@detalle.Monto.ToString("N2", new CultureInfo("es-ES"))</td>
+                </tr>
+            }
+            </tbody>
+            <tfoot class="border-dark border-1">
+            <tr>
+                <th class="text-center border-dark border-1" colspan="3">Totales Parciales</th>
+                <td class="text-end border-dark border-1">@detallesRemunerativos.Sum(d => d.Monto).ToString("N2", new CultureInfo("es-ES"))</td>
+                <td class="text-end border-dark border-1">@detallesNoRemunerativos.Sum(d => d.Monto).ToString("N2", new CultureInfo("es-ES"))</td>
+            </tr>
+            <tr>
+                <th class="text-center bg-dark bg-opacity-25 border-dark border-1" colspan="3">Total Bruto</th>
+                <td class="text-end bg-dark bg-opacity-25 border-dark border-1" colspan="2">@totalBruto.ToString("N2", new CultureInfo("es-ES"))</td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+    <h5>Deducciones</h5>
+    <div class="row">
+        <table class="table">
+            <thead class="bg-dark bg-opacity-25 border-dark border-1">
+            <tr>
+                <th class="text-center border-dark border-1">Concepto</th>
+                <th class="text-center border-dark border-1">Base</th>
+                <th class="text-center border-dark border-1">Unidad</th>
+                <th class="text-center border-dark border-1">$</th>
+            </tr>
+            </thead>
+            <tbody>
+            @{
+                var detallesDeducciones = Model.Recibo.Detalles.Where(d => d.Monto < 0);
+                var totalDeducciones = detallesDeducciones.Sum(d => d.Monto);
+            }
+
+            @foreach (var detalle in detallesDeducciones)
+            {
+                var concepto = Model.Conceptos.FirstOrDefault(c => c.Nombre == detalle.Concepto);
+                <tr>
+                    <td class="text-start border-dark border-1">@detalle.Concepto</td>
+                    <td class="text-end border-dark border-1">@detalle.Base.ToString("N2", new CultureInfo("es-ES"))</td>
+                    <td class="text-end border-dark border-1">@Math.Abs(detalle.Unidad * 100).ToString("N2", new CultureInfo("es-ES"))%</td>
+                    <td class="text-end border-dark border-1">@Math.Abs(@detalle.Monto).ToString("N2", new CultureInfo("es-ES"))</td>
+                </tr>
+            }
+            </tbody>
+            <tfoot class="border-dark border-1">
+            <tr>
+                <th class="text-center border-dark border-1" colspan="2">Total Deducciones</th>
+                <td class="text-end border-dark border-1" colspan="2">@Math.Abs(totalDeducciones).ToString("N2", new CultureInfo("es-ES"))</td>
+            </tr>
+            <tr>
+                <th class="text-center bg-dark bg-opacity-25 border-dark border-1" colspan="2">TOTAL NETO</th>
+                <td class="text-end bg-dark bg-opacity-25 border-dark border-1" colspan="2">@Math.Max(0, totalBruto + totalDeducciones).ToString("N2", new CultureInfo("es-ES"))</td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+
+<div>
+    <button id="printButton" class="btn btn-primary">
+        <i class="lni lni-printer"></i> Imprimir Recibo
+    </button>
+    <br>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    <script>
+    document.getElementById('printButton').addEventListener('click', function() {
+        // Your print id recibo
+        var printContents = document.getElementById('recibo').innerHTML;
+        var originalContents = document.body.innerHTML;
+        document.body.innerHTML = printContents;
+        window.print();
+    });
+    </script>
+}
