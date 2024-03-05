@@ -64,10 +64,6 @@ public class CreateModel : PageModel
         // Redondear el sueldo básico a dos decimales
         //sueldoBasico = Math.Round(sueldoBasico, 2);
 
-        // Obtener si tuvo horas extras en el periodo
-        // var horasExtras = await _context.HorasExtras
-
-        // Recibo.Detalles = new List<DetalleRecibo>();
         var sumaRemunerativa = 0m;
         var sumaNoRemunerativa = 0m;
 
@@ -104,6 +100,11 @@ public class CreateModel : PageModel
                 continue;
             }
 
+            if (concepto.Nombre == "Horas extras al 100%" || concepto.Nombre == "Horas extras al 50%")
+            {
+                continue;
+            }
+
             detalle = new DetalleRecibo
             {
                 Concepto = concepto.Nombre,
@@ -120,6 +121,46 @@ public class CreateModel : PageModel
             {
                 sumaNoRemunerativa += detalle.Monto;
             }
+        }
+
+        var horas_mes = await _context.Parametros
+            .Where(p => p.Nombre == "horas mes")
+            .Select(p => int.Parse(p.Valor))
+            .FirstOrDefaultAsync();
+
+        var valorHora = sumaRemunerativa / horas_mes;
+
+        // Horas Extras Remunerativas
+        var horasExtras = await _context.HorasExtras
+            .Where(h => h.ContratoId == Recibo.ContratoId && h.Fecha.Month == periodo.Month && h.Fecha.Year == periodo.Year)
+            .ToListAsync();
+
+        foreach (var horaExtra in horasExtras)
+        {
+            var detalle = new DetalleRecibo();
+            if (horaExtra.CienPorciento)
+            {
+                detalle = new DetalleRecibo
+                {
+                    Concepto = "Horas extras al 100%",
+                    Base = valorHora,
+                    Unidad = horaExtra.Horas,
+                    Monto = valorHora * horaExtra.Horas * 2,
+                };
+                sumaRemunerativa += detalle.Monto;
+            } else
+            {
+                detalle = new DetalleRecibo
+                {
+                    Concepto = "Horas extras al 50%",
+                    Base = valorHora,
+                    Unidad = horaExtra.Horas,
+                    Monto = valorHora * horaExtra.Horas * 1.5m,
+                };
+                sumaRemunerativa += detalle.Monto;
+            }
+
+            Recibo.Detalles.Add(detalle);
         }
 
         foreach (var concepto in conceptos.Where(c => c.Valor < 0))

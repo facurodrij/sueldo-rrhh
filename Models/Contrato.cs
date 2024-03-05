@@ -60,6 +60,4 @@ public class Contrato
 public enum HorasSemanales
 {
     [Display(Name = "Jornada Completa (48 hs)")] Completa = 48,
-    [Display(Name = "Media Jornada (24 hs)")] Media = 24,
-    [Display(Name = "Tres Cuartos (36 hs)")] TresCuartos = 36,
 }

@@ -1,7 +1,9 @@
 using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
 
 namespace sueldo_rrhh.Models;
 
+[Index(nameof(Periodo), nameof(ContratoId), IsUnique = true)]
 public class Recibo
 {
     public int Id { get; set; }

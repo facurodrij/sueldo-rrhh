@@ -1,8 +1,10 @@
 using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
 using sueldo_rrhh.Data;
 
 namespace sueldo_rrhh.Models;
 
+[Index(nameof(Fecha), nameof(ContratoId), IsUnique = true)]
 public class HoraExtra
 {
     private readonly ApplicationDbContext _context;
@@ -28,34 +30,5 @@ public class HoraExtra
         return $"{Fecha:dd/MM/yyyy} - {Horas}hs";
     }
 
-    // Metodo para determinar si el valor de la hora extra es 50% o 100%
-    // En Argentina, esto se determina de la siguiente manera:
-    // Este adicional del 50% corresponde a las horas extras realizadas en días normales de Lunes a Viernes y de Sábado hasta las 13 horas.
-    // Las horas extras realizadas en días Sábados a partir de las 13 horas, Domingos y feriados, se abonarán con un adicional del 100%.
-    [Display(Name = "Valor de la Hora Extra")]
-    public double ValorHoraExtra
-    {
-        get => CalcularValorHoraExtra();
-    }
-
-    public double CalcularValorHoraExtra()
-    {
-        try
-        {
-            var feriado = _context.Feriados.Any(f => f.Fecha.Date == Fecha.Date);
-
-            if (Fecha.DayOfWeek == DayOfWeek.Saturday && Fecha.Hour >= 13 || Fecha.DayOfWeek == DayOfWeek.Sunday ||
-                feriado)
-            {
-                return Horas * 2;
-            }
-
-            return Horas * 1.5;
-        }
-        catch (NullReferenceException)
-        {
-            //
-            return 0;
-        }
-    }
+    [Display(Name = "Es al 100%")] public bool CienPorciento { get; set; }
 }
