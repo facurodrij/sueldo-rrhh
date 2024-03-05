@@ -20,6 +20,9 @@
         if (await UserManager.IsInRoleAsync(user, "Admin"))
         {
             @await Html.PartialAsync("_AdminSidebar")
+        } else
+        {
+            @await Html.PartialAsync("_UserSidebar")
         }
     }
     <div class="main">

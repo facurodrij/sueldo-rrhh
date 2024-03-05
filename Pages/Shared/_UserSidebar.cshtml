@@ -1,0 +1,39 @@
+@* Pages/Shared/_AdminSidebar.cshtml *@
+
+<aside id="sidebar">
+    <div class="d-flex">
+        <button class="toggle-btn" type="button">
+            <i class="lni lni-menu"></i>
+        </button>
+        <div class="sidebar-logo">
+            <a asp-page="/Index">sueldo_rrhh</a>
+        </div>
+    </div>
+    <ul class="sidebar-nav">
+        <li class="sidebar-item">
+            <a asp-page="/Empleado/Contratos/Details" class="sidebar-link">
+                <i class="lni lni-pencil-alt"></i>
+                <span>Mi Contrato</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+            <a asp-page="/Empleado/HorasExtras/Index" class="sidebar-link">
+                <i class="lni lni-timer"></i>
+                <span>Mis Horas Extras</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+            <a asp-page="/Empleado/FeriadosTrabajados/Index" class="sidebar-link">
+                <i class="lni lni-calendar"></i>
+                <span>Mis Feriados Trabajados</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+            <a asp-page="/Empleado/Recibos/Index" class="sidebar-link">
+                <i class="lni lni-calculator-alt"></i>
+                <span>Mis Recibos</span>
+            </a>
+        </li>
+    </ul>
+</aside>
+
