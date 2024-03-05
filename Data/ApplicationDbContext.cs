@@ -198,25 +198,43 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
             },
             new Concepto
             {
-                Id = 13, ConvenioId = 1, Nombre = "Incremento No Remunerativo - Acuerdo Febrero 2024",
+                Id = 13, ConvenioId = 1, Nombre = "Acuerdo Febrero 2024 Antigüedad",
+                Fecha = new DateTime(2024, 3, 1), Valor = 0.0020m, Remunerativo = false,
+                Tipo = TipoConcepto.Antiguedad
+            },
+            new Concepto
+            {
+                Id = 14, ConvenioId = 1, Nombre = "Incremento No Remunerativo - Acuerdo Febrero 2024",
                 Fecha = new DateTime(2024, 2, 1), Valor = 0.376m, Remunerativo = false
             },
             new Concepto
             {
-                Id = 14, ConvenioId = 1, Nombre = "Acuerdo Febrero 2024 Presentismo",
+                Id = 15, ConvenioId = 1, Nombre = "Acuerdo Febrero 2024 Presentismo",
                 Fecha = new DateTime(2024, 2, 1), Valor = 0.03133m, Remunerativo = false,
                 Tipo = TipoConcepto.Asistencia
             },
             new Concepto
             {
-                Id = 15, ConvenioId = 1, Nombre = "Incremento No Remunerativo - Acuerdo Febrero 2024",
+                Id = 16, ConvenioId = 1, Nombre = "Acuerdo Febrero 2024 Antigüedad",
+                Fecha = new DateTime(2024, 2, 1), Valor = 0.00376m, Remunerativo = false,
+                Tipo = TipoConcepto.Antiguedad
+            },
+            new Concepto
+            {
+                Id = 17, ConvenioId = 1, Nombre = "Incremento No Remunerativo - Acuerdo Febrero 2024",
                 Fecha = new DateTime(2024, 3, 1), Valor = 0.376m, Remunerativo = false
             },
             new Concepto
             {
-                Id = 16, ConvenioId = 1, Nombre = "Acuerdo Febrero 2024 Presentismo",
+                Id = 18, ConvenioId = 1, Nombre = "Acuerdo Febrero 2024 Presentismo",
                 Fecha = new DateTime(2024, 3, 1), Valor = 0.03133m, Remunerativo = false,
                 Tipo = TipoConcepto.Asistencia
+            },
+            new Concepto
+            {
+                Id = 19, ConvenioId = 1, Nombre = "Acuerdo Febrero 2024 Antigüedad",
+                Fecha = new DateTime(2024, 3, 1), Valor = 0.00376m, Remunerativo = false,
+                Tipo = TipoConcepto.Antiguedad
             }
         );
     }
