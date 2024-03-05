@@ -25,8 +25,8 @@ public class EditModel : PageModel
         var contrato = await _context.Contratos.FirstOrDefaultAsync(m => m.Id == id);
         if (contrato == null) return NotFound();
         Contrato = contrato;
-        ViewData["CategoriaConvenioId"] = new SelectList(_context.CategoriasConvenio, "Id", "Nombre");
-        ViewData["PersonaId"] = new SelectList(_context.Personas, "Id", "Id");
+        ViewData["CategoriaConvenioId"] = new SelectList(_context.CategoriasConvenio, "Id", "ToDisplay");
+        ViewData["PersonaId"] = new SelectList(_context.Personas.Include(p => p.PersonaHistorials), "Id", "ToDisplay");
         return Page();
     }
 

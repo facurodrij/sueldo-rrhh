@@ -39,6 +39,8 @@ public class Contrato
 
     public ICollection<Recibo> Recibos { get; set; } = new List<Recibo>();
 
+    public ICollection<Solicitud> Solicitudes { get; set; } = new List<Solicitud>();
+
     public bool Activo()
     {
         return FechaFin == null || FechaFin > DateTime.Now;
@@ -54,6 +56,11 @@ public class Contrato
     public override string? ToString()
     {
         return $"{Persona?.PersonaHistorials.Last().NombreCompleto} - {CategoriaConvenio?.Nombre}";
+    }
+
+    public string ToDisplay
+    {
+        get { return $"{Persona?.PersonaHistorials.Last().NombreCompleto} - {CategoriaConvenio?.ToDisplay}"; }
     }
 }
 

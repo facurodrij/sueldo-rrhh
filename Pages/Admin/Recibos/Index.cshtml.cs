@@ -19,6 +19,10 @@ public class IndexModel : PageModel
     public async Task OnGetAsync()
     {
         Recibo = await _context.Recibos
-            .Include(r => r.Contrato).ToListAsync();
+            .Include(r => r.Contrato)
+            .Include(r => r.Contrato.Persona)
+            .ThenInclude(p => p.PersonaHistorials)
+            .Include(r => r.Contrato.CategoriaConvenio)
+            .ToListAsync();
     }
 }

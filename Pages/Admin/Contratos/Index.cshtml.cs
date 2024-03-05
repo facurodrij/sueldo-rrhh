@@ -20,6 +20,8 @@ public class IndexModel : PageModel
     {
         Contrato = await _context.Contratos
             .Include(c => c.CategoriaConvenio)
-            .Include(c => c.Persona).ToListAsync();
+            .Include(c => c.Persona)
+            .ThenInclude(p => p.PersonaHistorials)
+            .ToListAsync();
     }
 }

@@ -1,36 +1,50 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using sueldo_rrhh.Data;
 using sueldo_rrhh.Models;
 
-namespace sueldo_rrhh.Pages.Admin.Solicitudes;
-
-public class CreateModel : PageModel
+namespace sueldo_rrhh.Pages.Admin.Solicitudes
 {
-    private readonly ApplicationDbContext _context;
-
-    public CreateModel(ApplicationDbContext context)
+    public class CreateModel : PageModel
     {
-        _context = context;
-    }
+        private readonly sueldo_rrhh.Data.ApplicationDbContext _context;
 
-    public IActionResult OnGet()
-    {
-        ViewData["ContratoId"] = new SelectList(_context.Contratos, "Id", "Id");
-        return Page();
-    }
+        public CreateModel(sueldo_rrhh.Data.ApplicationDbContext context)
+        {
+            _context = context;
+        }
 
-    [BindProperty] public Solicitud Solicitud { get; set; } = default!;
+        public IActionResult OnGet()
+        {
+            ViewData["ContratoId"] =
+                new SelectList(_context.Contratos
+                        .Include(c => c.Persona)
+                        .ThenInclude(p => p.PersonaHistorials)
+                        .Include(c => c.CategoriaConvenio),
+                    "Id", "ToDisplay");
+            return Page();
+        }
 
-    // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
-    public async Task<IActionResult> OnPostAsync()
-    {
-        if (!ModelState.IsValid) return Page();
+        [BindProperty] public Solicitud Solicitud { get; set; } = default!;
 
-        _context.Solicitudes.Add(Solicitud);
-        await _context.SaveChangesAsync();
+        // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
+        public async Task<IActionResult> OnPostAsync()
+        {
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
 
-        return RedirectToPage("./Index");
+            _context.Solicitudes.Add(Solicitud);
+            await _context.SaveChangesAsync();
+
+            return RedirectToPage("./Index");
+        }
     }
 }

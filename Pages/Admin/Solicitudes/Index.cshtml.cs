@@ -1,24 +1,30 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using sueldo_rrhh.Data;
 using sueldo_rrhh.Models;
 
-namespace sueldo_rrhh.Pages.Admin.Solicitudes;
-
-public class IndexModel : PageModel
+namespace sueldo_rrhh.Pages.Admin.Solicitudes
 {
-    private readonly ApplicationDbContext _context;
-
-    public IndexModel(ApplicationDbContext context)
+    public class IndexModel : PageModel
     {
-        _context = context;
-    }
+        private readonly sueldo_rrhh.Data.ApplicationDbContext _context;
 
-    public IList<Solicitud> Solicitud { get; set; } = default!;
+        public IndexModel(sueldo_rrhh.Data.ApplicationDbContext context)
+        {
+            _context = context;
+        }
 
-    public async Task OnGetAsync()
-    {
-        Solicitud = await _context.Solicitudes
-            .Include(s => s.Contrato).ToListAsync();
+        public IList<Solicitud> Solicitud { get;set; } = default!;
+
+        public async Task OnGetAsync()
+        {
+            Solicitud = await _context.Solicitudes
+                .Include(s => s.Contrato).ToListAsync();
+        }
     }
 }

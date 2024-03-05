@@ -18,7 +18,9 @@ public class CreateModel : PageModel
 
     public IActionResult OnGet()
     {
-        ViewData["ContratoId"] = new SelectList(_context.Contratos, "Id", "Id");
+        ViewData["ContratoId"] = new SelectList(_context.Contratos.Include(c => c.Persona)
+            .ThenInclude(p => p.PersonaHistorials)
+            .Include(c => c.CategoriaConvenio), "Id", "ToDisplay");
         return Page();
     }
 

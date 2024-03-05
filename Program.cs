@@ -22,7 +22,11 @@ builder.Services.AddAuthorizationBuilder()
     .AddPolicy("Admin", policy => policy.RequireRole("Admin"));
 
 // Definir que todas las páginas que esten dentro del directorio Admin, requieren el rol de Admin
-builder.Services.AddRazorPages(options => { options.Conventions.AuthorizeFolder("/Admin", "Admin"); });
+builder.Services.AddRazorPages(options =>
+{
+    options.Conventions.AuthorizeFolder("/Admin", "Admin");
+    options.Conventions.AuthorizeFolder("/Empleado");
+});
 
 builder.Services.Configure<IdentityOptions>(options =>
 {

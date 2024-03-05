@@ -1,4 +1,5 @@
 @page
+@using sueldo_rrhh.Models
 @model sueldo_rrhh.Pages.Admin.Solicitudes.CreateModel
 
 @{
@@ -8,47 +9,47 @@
 <h1>Create</h1>
 
 <h4>Solicitud</h4>
-<hr/>
+<hr />
 <div class="row">
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Solicitud.ContratoId" class="control-label"></label>
-                <select asp-for="Solicitud.ContratoId" class="form-control" asp-items="ViewBag.ContratoId"></select>
+                <select asp-for="Solicitud.ContratoId" class ="form-control" asp-items="ViewBag.ContratoId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="Solicitud.FechaSolicitud" class="control-label"></label>
-                <input asp-for="Solicitud.FechaSolicitud" class="form-control"/>
+                <input asp-for="Solicitud.FechaSolicitud" class="form-control" />
                 <span asp-validation-for="Solicitud.FechaSolicitud" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Solicitud.FechaInicio" class="control-label"></label>
-                <input asp-for="Solicitud.FechaInicio" class="form-control"/>
+                <input asp-for="Solicitud.FechaInicio" class="form-control" />
                 <span asp-validation-for="Solicitud.FechaInicio" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Solicitud.FechaFin" class="control-label"></label>
-                <input asp-for="Solicitud.FechaFin" class="form-control"/>
+                <input asp-for="Solicitud.FechaFin" class="form-control" />
                 <span asp-validation-for="Solicitud.FechaFin" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Solicitud.Motivo" class="control-label"></label>
-                <select asp-for="Solicitud.Motivo" class="form-control"></select>
+                <select asp-for="Solicitud.Motivo" class="form-control" asp-items="Html.GetEnumSelectList<MotivoSolicitud>()"></select>
                 <span asp-validation-for="Solicitud.Motivo" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Solicitud.Descripcion" class="control-label"></label>
-                <input asp-for="Solicitud.Descripcion" class="form-control"/>
+                <input asp-for="Solicitud.Descripcion" class="form-control" />
                 <span asp-validation-for="Solicitud.Descripcion" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Solicitud.Estado" class="control-label"></label>
-                <select asp-for="Solicitud.Estado" class="form-control"></select>
+                <select asp-for="Solicitud.Estado" class="form-control" asp-items="Html.GetEnumSelectList<EstadoSolicitud>()"></select>
                 <span asp-validation-for="Solicitud.Estado" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary"/>
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
@@ -59,5 +60,5 @@
 </div>
 
 @section Scripts {
-    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using sueldo_rrhh.Data;
 using sueldo_rrhh.Models;
 
@@ -17,8 +18,8 @@ public class CreateModel : PageModel
 
     public IActionResult OnGet()
     {
-        ViewData["CategoriaConvenioId"] = new SelectList(_context.CategoriasConvenio, "Id", "Nombre");
-        ViewData["PersonaId"] = new SelectList(_context.Personas, "Id", "Id");
+        ViewData["CategoriaConvenioId"] = new SelectList(_context.CategoriasConvenio, "Id", "ToDisplay");
+        ViewData["PersonaId"] = new SelectList(_context.Personas.Include(p => p.PersonaHistorials), "Id", "ToDisplay");
         return Page();
     }
 
