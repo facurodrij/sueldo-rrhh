@@ -43,7 +43,7 @@ public class Empresa
     [DataType(DataType.DateTime)]
     public DateTime FechaRegistro { get; set; } = DateTime.Now;
 
-    public ICollection<Contrato> Contratos { get; set; } = new List<Contrato>();
+    //public ICollection<Contrato> Contratos { get; set; } = new List<Contrato>();
 
     public override string? ToString()
     {
