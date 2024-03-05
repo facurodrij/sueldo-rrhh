@@ -11,7 +11,7 @@ using sueldo_rrhh.Data;
 namespace sueldo_rrhh.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240303012204_Initial")]
+    [Migration("20240305084624_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -240,8 +240,8 @@ namespace sueldo_rrhh.Data.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
-                    b.Property<double>("SueldoBasico")
-                        .HasColumnType("REAL");
+                    b.Property<decimal>("SueldoBasico")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -256,7 +256,7 @@ namespace sueldo_rrhh.Data.Migrations
                             Agrupamiento = 'A',
                             ConvenioId = 1,
                             Nombre = "Maestranza y Servicios",
-                            SueldoBasico = 441108.34000000003
+                            SueldoBasico = 441108.34m
                         },
                         new
                         {
@@ -264,7 +264,7 @@ namespace sueldo_rrhh.Data.Migrations
                             Agrupamiento = 'B',
                             ConvenioId = 1,
                             Nombre = "Maestranza y Servicios",
-                            SueldoBasico = 442385.29999999999
+                            SueldoBasico = 442385.30m
                         },
                         new
                         {
@@ -272,7 +272,7 @@ namespace sueldo_rrhh.Data.Migrations
                             Agrupamiento = 'C',
                             ConvenioId = 1,
                             Nombre = "Maestranza y Servicios",
-                            SueldoBasico = 446859.16999999998
+                            SueldoBasico = 446859.17m
                         },
                         new
                         {
@@ -280,7 +280,7 @@ namespace sueldo_rrhh.Data.Migrations
                             Agrupamiento = 'A',
                             ConvenioId = 1,
                             Nombre = "Administrativo",
-                            SueldoBasico = 445901.45000000001
+                            SueldoBasico = 445901.45m
                         },
                         new
                         {
@@ -288,7 +288,7 @@ namespace sueldo_rrhh.Data.Migrations
                             Agrupamiento = 'B',
                             ConvenioId = 1,
                             Nombre = "Administrativo",
-                            SueldoBasico = 447820.26000000001
+                            SueldoBasico = 447820.26m
                         },
                         new
                         {
@@ -296,7 +296,7 @@ namespace sueldo_rrhh.Data.Migrations
                             Agrupamiento = 'C',
                             ConvenioId = 1,
                             Nombre = "Administrativo",
-                            SueldoBasico = 449736.83000000002
+                            SueldoBasico = 449736.83m
                         },
                         new
                         {
@@ -304,7 +304,7 @@ namespace sueldo_rrhh.Data.Migrations
                             Agrupamiento = 'D',
                             ConvenioId = 1,
                             Nombre = "Administrativo",
-                            SueldoBasico = 455489.90999999997
+                            SueldoBasico = 455489.91m
                         },
                         new
                         {
@@ -312,7 +312,7 @@ namespace sueldo_rrhh.Data.Migrations
                             Agrupamiento = 'E',
                             ConvenioId = 1,
                             Nombre = "Administrativo",
-                            SueldoBasico = 460283.01000000001
+                            SueldoBasico = 460283.01m
                         },
                         new
                         {
@@ -320,7 +320,7 @@ namespace sueldo_rrhh.Data.Migrations
                             Agrupamiento = 'F',
                             ConvenioId = 1,
                             Nombre = "Administrativo",
-                            SueldoBasico = 467314.16999999998
+                            SueldoBasico = 467314.17m
                         },
                         new
                         {
@@ -328,7 +328,7 @@ namespace sueldo_rrhh.Data.Migrations
                             Agrupamiento = 'A',
                             ConvenioId = 1,
                             Nombre = "Cajero",
-                            SueldoBasico = 447498.77000000002
+                            SueldoBasico = 447498.77m
                         },
                         new
                         {
@@ -336,7 +336,7 @@ namespace sueldo_rrhh.Data.Migrations
                             Agrupamiento = 'B',
                             ConvenioId = 1,
                             Nombre = "Cajero",
-                            SueldoBasico = 449736.83000000002
+                            SueldoBasico = 449736.83m
                         },
                         new
                         {
@@ -344,7 +344,7 @@ namespace sueldo_rrhh.Data.Migrations
                             Agrupamiento = 'C',
                             ConvenioId = 1,
                             Nombre = "Cajero",
-                            SueldoBasico = 452613.37
+                            SueldoBasico = 452613.37m
                         },
                         new
                         {
@@ -352,7 +352,7 @@ namespace sueldo_rrhh.Data.Migrations
                             Agrupamiento = 'A',
                             ConvenioId = 1,
                             Nombre = "Auxiliar",
-                            SueldoBasico = 447498.77000000002
+                            SueldoBasico = 447498.77m
                         },
                         new
                         {
@@ -360,7 +360,7 @@ namespace sueldo_rrhh.Data.Migrations
                             Agrupamiento = 'B',
                             ConvenioId = 1,
                             Nombre = "Auxiliar",
-                            SueldoBasico = 450694.54999999999
+                            SueldoBasico = 450694.55m
                         },
                         new
                         {
@@ -368,7 +368,7 @@ namespace sueldo_rrhh.Data.Migrations
                             Agrupamiento = 'C',
                             ConvenioId = 1,
                             Nombre = "Auxiliar",
-                            SueldoBasico = 461241.85999999999
+                            SueldoBasico = 461241.86m
                         },
                         new
                         {
@@ -376,7 +376,7 @@ namespace sueldo_rrhh.Data.Migrations
                             Agrupamiento = 'A',
                             ConvenioId = 1,
                             Nombre = "Auxiliar Especializado",
-                            SueldoBasico = 451335.28000000003
+                            SueldoBasico = 451335.28m
                         },
                         new
                         {
@@ -384,7 +384,7 @@ namespace sueldo_rrhh.Data.Migrations
                             Agrupamiento = 'B',
                             ConvenioId = 1,
                             Nombre = "Auxiliar Especializado",
-                            SueldoBasico = 457087.22999999998
+                            SueldoBasico = 457087.23m
                         },
                         new
                         {
@@ -392,7 +392,7 @@ namespace sueldo_rrhh.Data.Migrations
                             Agrupamiento = 'A',
                             ConvenioId = 1,
                             Nombre = "Vendedor",
-                            SueldoBasico = 447498.77000000002
+                            SueldoBasico = 447498.77m
                         },
                         new
                         {
@@ -400,7 +400,7 @@ namespace sueldo_rrhh.Data.Migrations
                             Agrupamiento = 'B',
                             ConvenioId = 1,
                             Nombre = "Vendedor",
-                            SueldoBasico = 457088.35999999999
+                            SueldoBasico = 457088.36m
                         },
                         new
                         {
@@ -408,7 +408,7 @@ namespace sueldo_rrhh.Data.Migrations
                             Agrupamiento = 'C',
                             ConvenioId = 1,
                             Nombre = "Vendedor",
-                            SueldoBasico = 460283.01000000001
+                            SueldoBasico = 460283.01m
                         },
                         new
                         {
@@ -416,7 +416,7 @@ namespace sueldo_rrhh.Data.Migrations
                             Agrupamiento = 'D',
                             ConvenioId = 1,
                             Nombre = "Vendedor",
-                            SueldoBasico = 467314.16999999998
+                            SueldoBasico = 467314.17m
                         });
                 });
 
@@ -442,8 +442,8 @@ namespace sueldo_rrhh.Data.Migrations
                     b.Property<int?>("Tipo")
                         .HasColumnType("INTEGER");
 
-                    b.Property<double>("Valor")
-                        .HasColumnType("REAL");
+                    b.Property<decimal>("Valor")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -458,47 +458,51 @@ namespace sueldo_rrhh.Data.Migrations
                             ConvenioId = 1,
                             Nombre = "Sueldo básico",
                             Remunerativo = true,
-                            Valor = 450000.0
+                            Valor = 450000m
                         },
                         new
                         {
                             Id = 2,
                             ConvenioId = 1,
-                            Nombre = "Adicional por asistencia",
+                            Nombre = "Adicional por antiguedad",
                             Remunerativo = true,
-                            Valor = 0.083299999999999999
+                            Tipo = 1,
+                            Valor = 0.01m
                         },
                         new
                         {
                             Id = 3,
                             ConvenioId = 1,
-                            Nombre = "Adicional por antiguedad",
+                            Nombre = "Adicional por asistencia",
                             Remunerativo = true,
-                            Valor = 0.01
+                            Tipo = 0,
+                            Valor = 0.08333m
                         },
                         new
                         {
                             Id = 4,
                             ConvenioId = 1,
-                            Nombre = "Descuento jubilatorio",
+                            Nombre = "Horas extras al 50%",
                             Remunerativo = true,
-                            Valor = -0.11
+                            Tipo = 2,
+                            Valor = 1.5m
                         },
                         new
                         {
                             Id = 5,
                             ConvenioId = 1,
-                            Nombre = "Descuento obra social",
+                            Nombre = "Horas extras al 100%",
                             Remunerativo = true,
-                            Valor = -0.029999999999999999
+                            Tipo = 2,
+                            Valor = 2.0m
                         },
                         new
                         {
                             Id = 6,
                             ConvenioId = 1,
-                            Nombre = "Descuento sindical",
+                            Nombre = "Descuento jubilatorio",
                             Remunerativo = true,
-                            Valor = -0.02
+                            Valor = -0.11m
                         },
                         new
                         {
@@ -506,69 +510,118 @@ namespace sueldo_rrhh.Data.Migrations
                             ConvenioId = 1,
                             Nombre = "Descuento Ley 19.032 - INSSJP",
                             Remunerativo = true,
-                            Valor = -0.029999999999999999
+                            Valor = -0.03m
                         },
                         new
                         {
                             Id = 8,
                             ConvenioId = 1,
-                            Nombre = "Descuento FAECyS - Art. 100 CCT 130/75",
-                            Remunerativo = true,
-                            Valor = -0.0050000000000000001
+                            Nombre = "Descuento obra social",
+                            Remunerativo = false,
+                            Valor = -0.03m
                         },
                         new
                         {
                             Id = 9,
                             ConvenioId = 1,
-                            Fecha = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Nombre = "Incremento No Remunerativo - Acuerdo Febrero 2024",
+                            Nombre = "Descuento sindical",
                             Remunerativo = false,
-                            Valor = 0.20000000000000001
+                            Valor = -0.02m
                         },
                         new
                         {
                             Id = 10,
                             ConvenioId = 1,
-                            Fecha = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Nombre = "Acuerdo Febrero 2024 Presentismo",
+                            Nombre = "Descuento FAECyS - Art. 100 CCT 130/75",
                             Remunerativo = false,
-                            Valor = 0.0166
+                            Valor = -0.005m
                         },
                         new
                         {
                             Id = 11,
                             ConvenioId = 1,
-                            Fecha = new DateTime(2024, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Fecha = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Nombre = "Incremento No Remunerativo - Acuerdo Febrero 2024",
                             Remunerativo = false,
-                            Valor = 0.376
+                            Valor = 0.20m
                         },
                         new
                         {
                             Id = 12,
                             ConvenioId = 1,
-                            Fecha = new DateTime(2024, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Fecha = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Nombre = "Acuerdo Febrero 2024 Presentismo",
                             Remunerativo = false,
-                            Valor = 0.031300000000000001
+                            Tipo = 0,
+                            Valor = 0.0166m
                         },
                         new
                         {
                             Id = 13,
                             ConvenioId = 1,
                             Fecha = new DateTime(2024, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Nombre = "Incremento No Remunerativo - Acuerdo Febrero 2024",
+                            Nombre = "Acuerdo Febrero 2024 Antigüedad",
                             Remunerativo = false,
-                            Valor = 0.376
+                            Tipo = 1,
+                            Valor = 0.0020m
                         },
                         new
                         {
                             Id = 14,
                             ConvenioId = 1,
+                            Fecha = new DateTime(2024, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nombre = "Incremento No Remunerativo - Acuerdo Febrero 2024",
+                            Remunerativo = false,
+                            Valor = 0.376m
+                        },
+                        new
+                        {
+                            Id = 15,
+                            ConvenioId = 1,
+                            Fecha = new DateTime(2024, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nombre = "Acuerdo Febrero 2024 Presentismo",
+                            Remunerativo = false,
+                            Tipo = 0,
+                            Valor = 0.03133m
+                        },
+                        new
+                        {
+                            Id = 16,
+                            ConvenioId = 1,
+                            Fecha = new DateTime(2024, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nombre = "Acuerdo Febrero 2024 Antigüedad",
+                            Remunerativo = false,
+                            Tipo = 1,
+                            Valor = 0.00376m
+                        },
+                        new
+                        {
+                            Id = 17,
+                            ConvenioId = 1,
+                            Fecha = new DateTime(2024, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nombre = "Incremento No Remunerativo - Acuerdo Febrero 2024",
+                            Remunerativo = false,
+                            Valor = 0.376m
+                        },
+                        new
+                        {
+                            Id = 18,
+                            ConvenioId = 1,
                             Fecha = new DateTime(2024, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Nombre = "Acuerdo Febrero 2024 Presentismo",
                             Remunerativo = false,
-                            Valor = 0.031300000000000001
+                            Tipo = 0,
+                            Valor = 0.03133m
+                        },
+                        new
+                        {
+                            Id = 19,
+                            ConvenioId = 1,
+                            Fecha = new DateTime(2024, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nombre = "Acuerdo Febrero 2024 Antigüedad",
+                            Remunerativo = false,
+                            Tipo = 1,
+                            Valor = 0.00376m
                         });
                 });
 
@@ -582,9 +635,6 @@ namespace sueldo_rrhh.Data.Migrations
                         .HasColumnType("REAL");
 
                     b.Property<int>("CategoriaConvenioId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("EmpresaId")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("FechaFin")
@@ -602,8 +652,6 @@ namespace sueldo_rrhh.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CategoriaConvenioId");
-
-                    b.HasIndex("EmpresaId");
 
                     b.HasIndex("PersonaId")
                         .IsUnique();
@@ -639,6 +687,9 @@ namespace sueldo_rrhh.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
+
+                    b.Property<decimal>("Base")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Concepto")
                         .IsRequired()
@@ -717,7 +768,7 @@ namespace sueldo_rrhh.Data.Migrations
                             Categoria = "Comercio",
                             Direccion = "Direccion 1",
                             Email = "stockcar@localhost",
-                            FechaRegistro = new DateTime(2024, 3, 2, 22, 22, 4, 194, DateTimeKind.Local).AddTicks(5923),
+                            FechaRegistro = new DateTime(2024, 3, 5, 5, 46, 23, 598, DateTimeKind.Local).AddTicks(8770),
                             Nombre = "StockCar",
                             RazonSocial = "StockCar SA",
                             Telefono = "123456789"
@@ -840,6 +891,9 @@ namespace sueldo_rrhh.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<bool>("CienPorciento")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("ContratoId")
                         .HasColumnType("INTEGER");
 
@@ -852,6 +906,9 @@ namespace sueldo_rrhh.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ContratoId");
+
+                    b.HasIndex("Fecha", "ContratoId")
+                        .IsUnique();
 
                     b.ToTable("HoraExtra", (string)null);
                 });
@@ -980,13 +1037,13 @@ namespace sueldo_rrhh.Data.Migrations
                             CUIL = "20345678901",
                             Domicilio = "Direccion 2",
                             EstadoCivil = 0,
-                            FechaIngreso = new DateTime(2024, 3, 2, 22, 22, 4, 194, DateTimeKind.Local).AddTicks(6056),
+                            FechaIngreso = new DateTime(2024, 3, 5, 5, 46, 23, 598, DateTimeKind.Local).AddTicks(8916),
                             FechaNacimiento = new DateTime(2000, 10, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Genero = 0,
                             Hijos = 0,
                             NombreCompleto = "Admin",
                             PersonaId = 1,
-                            VigenteDesde = new DateTime(2024, 3, 2, 22, 22, 4, 194, DateTimeKind.Local).AddTicks(6049)
+                            VigenteDesde = new DateTime(2024, 3, 5, 5, 46, 23, 598, DateTimeKind.Local).AddTicks(8907)
                         });
                 });
 
@@ -1012,6 +1069,9 @@ namespace sueldo_rrhh.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ContratoId");
+
+                    b.HasIndex("Periodo", "ContratoId")
+                        .IsUnique();
 
                     b.ToTable("Recibo", (string)null);
                 });
@@ -1142,10 +1202,6 @@ namespace sueldo_rrhh.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("sueldo_rrhh.Models.Empresa", null)
-                        .WithMany("Contratos")
-                        .HasForeignKey("EmpresaId");
-
                     b.HasOne("sueldo_rrhh.Models.Persona", "Persona")
                         .WithOne("Contrato")
                         .HasForeignKey("sueldo_rrhh.Models.Contrato", "PersonaId")
@@ -1160,7 +1216,7 @@ namespace sueldo_rrhh.Data.Migrations
             modelBuilder.Entity("sueldo_rrhh.Models.DetalleRecibo", b =>
                 {
                     b.HasOne("sueldo_rrhh.Models.Recibo", "Recibo")
-                        .WithMany()
+                        .WithMany("Detalles")
                         .HasForeignKey("ReciboId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1212,7 +1268,7 @@ namespace sueldo_rrhh.Data.Migrations
             modelBuilder.Entity("sueldo_rrhh.Models.Recibo", b =>
                 {
                     b.HasOne("sueldo_rrhh.Models.Contrato", "Contrato")
-                        .WithMany()
+                        .WithMany("Recibos")
                         .HasForeignKey("ContratoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1241,16 +1297,13 @@ namespace sueldo_rrhh.Data.Migrations
                     b.Navigation("FeriadosTrabajados");
 
                     b.Navigation("HorasExtras");
+
+                    b.Navigation("Recibos");
                 });
 
             modelBuilder.Entity("sueldo_rrhh.Models.Convenio", b =>
                 {
                     b.Navigation("Categorias");
-                });
-
-            modelBuilder.Entity("sueldo_rrhh.Models.Empresa", b =>
-                {
-                    b.Navigation("Contratos");
                 });
 
             modelBuilder.Entity("sueldo_rrhh.Models.Persona", b =>
@@ -1260,6 +1313,11 @@ namespace sueldo_rrhh.Data.Migrations
                     b.Navigation("PersonaHistorials");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("sueldo_rrhh.Models.Recibo", b =>
+                {
+                    b.Navigation("Detalles");
                 });
 #pragma warning restore 612, 618
         }
